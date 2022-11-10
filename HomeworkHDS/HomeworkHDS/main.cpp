@@ -27,7 +27,7 @@ float Calculation(float _fX, float _fY, float _fPercent)
 	std::cout << "1번 : 목표, 재료 고정 후 퍼센트 값만 변경 하여 다시 계산" << std::endl;
 	std::cout << "2번 : 계산 완료 값 출력, 이전에 출력된 내용 전부 삭제" << std::endl;
 	std::cout << std::endl;
-	std::cout << "다른 키 입력시 데스크탑 폭파예정" << std::endl;
+	std::cout << "다른 키 입력시 초기화" << std::endl;
 	std::cout << std::endl;
 	std::cin >> iInput;
 
@@ -59,7 +59,7 @@ float Calculation(float _fX, float _fY, float _fPercent)
 		system("cls");
 		std::cout << "최종결과값 :" << fResult << "%" << std::endl;
 		std::cout << "알겠냐 이자시가!!!!!" << std::endl;
-		std::cout << "아무키나 누르면 종료" << std::endl;
+		std::cout << "아무키나 누르면 처음부터" << std::endl;
 		system("pause");
 		return 0;
 	}
@@ -68,29 +68,34 @@ float Calculation(float _fX, float _fY, float _fPercent)
 
 int main()
 {
-	float fX = 0.f;
-	float fY = 0.f;
-	float fPercent = 0.f;
-	int iInput = 0;
+	while (true)
+	{
+		system("cls");
 
-	// 제가 아닙니다.
-	std::cout << "★엿같은 버섯의 계산기★" << std::endl;
-	std::cout << std::endl;
+		float fX = 0.f;
+		float fY = 0.f;
+		float fPercent = 0.f;
+		int iInput = 0;
 
-	std::cout << "목표 입력 :  ";
-	std::cin >> fX;
+		// 제가 아닙니다.
+		std::cout << "★엿같은 버섯의 계산기★" << std::endl;
+		std::cout << std::endl;
 
-	std::cout << "재료 입력 :  ";
-	std::cin >> fY;
-	std::cout << std::endl;
+		std::cout << "목표 입력 :  ";
+		std::cin >> fX;
 
-	std::cout << "% 값 입력, 소수점단위로 입력 ex) 0.01 ~ 1.00" << std::endl;
-	std::cout << "% 값 입력 :  ";
-	std::cin >> fPercent;
-	std::cout << std::endl;
+		std::cout << "재료 입력 :  ";
+		std::cin >> fY;
+		std::cout << std::endl;
 
-	// 계산함수 
-	Calculation(fX, fY, fPercent);
+		std::cout << "% 값 입력, 소수점단위로 입력 ex) 0.01 ~ 1.00" << std::endl;
+		std::cout << "% 값 입력 :  ";
+		std::cin >> fPercent;
+		std::cout << std::endl;
+
+		// 계산함수 
+		Calculation(fX, fY, fPercent);
+	}
 
 	return 0;
 }
