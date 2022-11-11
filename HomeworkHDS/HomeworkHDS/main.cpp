@@ -3,7 +3,7 @@
 // 연습용코드 
 
 // 계산함수 
-float Calculation(float _fX, float _fY, float _fPercent)
+int Calculation(float _fX, float _fY, float _fPercent)
 {
 	float fX = _fX;
 	float fY = _fY;
@@ -33,11 +33,7 @@ float Calculation(float _fX, float _fY, float _fPercent)
 
 	// 예외처리
 	if (iInput < 1 || iInput > 2)
-	{
-		// 폭파
-		std::cout << " !!!!!!!!!!!!!!!!! 펑 !!!!!!!!!!!! " << std::endl;
 		return 0;
-	}
 
 	if (iInput == 1)
 	{
@@ -63,6 +59,8 @@ float Calculation(float _fX, float _fY, float _fPercent)
 		system("pause");
 		return 0;
 	}
+
+	return 0;
 }
 
 
