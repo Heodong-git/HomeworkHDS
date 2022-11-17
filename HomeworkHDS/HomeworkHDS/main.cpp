@@ -2,9 +2,18 @@
 
 // 연습용코드 
 
+
+enum class EPick
+{
+	RECALCULATION = 1,
+	CHECK = 2,
+
+	EXIT = 3
+};
+
 // 계산함수 
 int Calculation(float _fX, float _fY, float _fPercent)
-{
+{ 
 	float fX = _fX;
 	float fY = _fY;
 	float fPercent = _fPercent;
@@ -73,7 +82,7 @@ int main()
 		float fX = 0.f;
 		float fY = 0.f;
 		float fPercent = 0.f;
-		int iInput = 0;
+		//int iInput = 0;
 
 		// 제가 아닙니다.
 		std::cout << "★엿같은 버섯의 계산기★" << std::endl;

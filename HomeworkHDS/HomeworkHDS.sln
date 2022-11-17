@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "practice", "HomeworkHDS\Hom
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20221111Homework", "20221111Homework\20221111Homework.vcxproj", "{C0680862-A647-4379-8536-DB101213F1FE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20221117Homework", "20221117Homework\20221117Homework.vcxproj", "{BE80D309-EE93-448E-9425-B66839A3FF93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{C0680862-A647-4379-8536-DB101213F1FE}.Release|x64.Build.0 = Release|x64
 		{C0680862-A647-4379-8536-DB101213F1FE}.Release|x86.ActiveCfg = Release|Win32
 		{C0680862-A647-4379-8536-DB101213F1FE}.Release|x86.Build.0 = Release|Win32
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Debug|x64.ActiveCfg = Debug|x64
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Debug|x64.Build.0 = Debug|x64
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Debug|x86.ActiveCfg = Debug|Win32
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Debug|x86.Build.0 = Debug|Win32
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Release|x64.ActiveCfg = Release|x64
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Release|x64.Build.0 = Release|x64
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Release|x86.ActiveCfg = Release|Win32
+		{BE80D309-EE93-448E-9425-B66839A3FF93}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
