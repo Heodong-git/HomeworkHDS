@@ -69,6 +69,8 @@ int main()
 
         int Value = _getch();
 
+        // 함수내부에서 데미지계산 실행 후에 system("cls") 함수를 호출하여
+        // 콘솔창을 지우고 Player와 Monster 의 Status 함수를 호출하여 다시 출력해준다. 
         PlayerDamage(MonsterAtt);
         MonsterDamage(PlayerAtt);
     }
