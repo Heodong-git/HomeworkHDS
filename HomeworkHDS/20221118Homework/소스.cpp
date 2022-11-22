@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
 
 int PlayerAtt = 20;
 int PlayerHp = 200;
