@@ -9,50 +9,43 @@ int PlayerHp = 200;
 int MonsterAtt = 10;
 int MonsterHp = 100;
 
-void PlayerStatus()
+
+// 플레이어 데미지 이후 출력되는 문자열이 연속으로 나오게 수정
+
+void StatusRender(const char* _Name, int _Att, int _Hp)
 {
-    printf_s("플레이어=====================================\n");
-    printf_s("공격력 = %d \n", PlayerAtt);
-    printf_s("체  력 = %d \n", PlayerHp);
+    printf_s("%s=====================================\n", _Name);
+    printf_s("공격력 = %d \n", _Att);
+    printf_s("체  력 = %d \n", _Hp);
     printf_s("============================================\n");
 }
 
-void MonsterStatus()
+void Damage(int _PlayerAtt, int _MonsterAtt)
 {
-    printf_s("몬스터=====================================\n");
-    printf_s("공격력 = %d \n", MonsterAtt);
-    printf_s("체  력 = %d \n", MonsterHp);
-    printf_s("===========================================\n");
-}
-
-void PlayerDamage(int _Damage)
-{
-    PlayerHp -= _Damage;
+    PlayerHp -= _MonsterAtt;
 
     system("cls");
 
-    PlayerStatus();
-    MonsterStatus();
+    StatusRender("플레이어", MonsterAtt, PlayerHp);
+    StatusRender("몬스터", PlayerAtt, MonsterHp);
 
     int Input = 0;
-    printf_s("플레이어가 %d데미지를 받았습니다.\n", _Damage);
+    printf_s("플레이어가 %d데미지를 받았습니다.\n", _MonsterAtt);
     Input = _getch();
     printf_s("플레이어는 %d체력이 남았습니다.\n", PlayerHp);
     Input = _getch();
 
-}
-
-void MonsterDamage(int _Damage)
-{
-    MonsterHp -= _Damage;
+    MonsterHp -= _PlayerAtt;
 
     system("cls");
 
-    PlayerStatus();
-    MonsterStatus();
+    StatusRender("플레이어", MonsterAtt, PlayerHp);
+    StatusRender("몬스터", PlayerAtt, MonsterHp);
 
-    int Input = 0;
-    printf_s("몬스터가 %d데미지를 받았습니다.\n", _Damage);
+    printf_s("플레이어가 %d데미지를 받았습니다.\n", _MonsterAtt);
+    printf_s("플레이어는 %d체력이 남았습니다.\n", PlayerHp);
+
+    printf_s("몬스터가 %d데미지를 받았습니다.\n", _PlayerAtt);
     Input = _getch();
     printf_s("몬스터는 %d체력이 남았습니다.\n", MonsterHp);
     Input = _getch();
@@ -65,14 +58,12 @@ int main()
         // \n
         // int Value = system("D:\\AR45\\CPlusPlus\\x64\\Debug\\01.Program.exe");
         system("cls");
-        PlayerStatus();
-        MonsterStatus();
+        
+        StatusRender("플레이어", MonsterAtt, PlayerHp);
+        StatusRender("몬스터", PlayerAtt, MonsterHp);
 
         int Value = _getch();
 
-        // 함수내부에서 데미지계산 실행 후에 system("cls") 함수를 호출하여
-        // 콘솔창을 지우고 Player와 Monster 의 Status 함수를 호출하여 다시 출력해준다. 
-        PlayerDamage(MonsterAtt);
-        MonsterDamage(PlayerAtt);
+        Damage(PlayerAtt, MonsterAtt);
     }
 }
