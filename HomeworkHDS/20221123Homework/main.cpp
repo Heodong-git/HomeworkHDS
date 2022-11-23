@@ -1,5 +1,7 @@
 #include <iostream>
 
+
+// 널문자 제외 문자열 길이 체크 함수
 int MyStringCount(const char* _String)
 {
     // 개수를 체크할 변수
@@ -36,10 +38,6 @@ int main()
     int Len2 = MyStringCount("wew00000");   
     int Len3 = MyStringCount("gnvmkv");
 
-    int Test = MyStringCount("으어으아한국어문자열개수테스트으억꾸에엑");
-    
-    printf_s("%d", Test);
-    printf_s("\n");
     printf_s("Len0 변수의 문자열 길이 : %d", Len0);
     printf_s("\n");
     printf_s("Len1 변수의 문자열 길이 : %d", Len1);
@@ -47,6 +45,14 @@ int main()
     printf_s("Len2 변수의 문자열 길이 : %d", Len2);
     printf_s("\n");
     printf_s("Len3 변수의 문자열 길이 : %d", Len3);
+    printf_s("\n");
+
+    int Test = MyStringCount("으어으아한국어문자열개수테스트으억꾸에엑");
+    printf_s("%d", Test);
+    printf_s("\n");
+
+    Test = MyStringCount("아무거나넣어보자adsf");
+    printf_s("%d", Test);
 
     return 0;
 }
