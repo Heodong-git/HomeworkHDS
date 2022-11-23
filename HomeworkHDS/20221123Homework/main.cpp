@@ -5,19 +5,19 @@ int MyStringCount(const char* _String)
     // 개수를 체크할 변수
     int Count = 0;
 
-    const char* CheckString = _String;
+    const char* StringCheck = _String;
     
     // 반복문을 사용하여 0이 나올때 까지 검사 
     for (int i = 0; i < INT_MAX; ++i)
     {
         // 0이 아니라면 변수의 값을 증가
-        if (CheckString[i] != 0)
+        if (StringCheck[i] != 0)
         {
             ++Count;
         }
 
         // 0을 만날 경우 문자열의 끝이라는 의미
-        else if (CheckString[i] == 0)
+        else if (StringCheck[i] == 0)
         {
             // 반복문 종료 
             break;
@@ -36,7 +36,7 @@ int main()
     int Len2 = MyStringCount("wew00000");   
     int Len3 = MyStringCount("gnvmkv");
 
-    int Test = MyStringCount("으어으아어한국어문자열개수테스트으억");
+    int Test = MyStringCount("으어으아한국어문자열개수테스트으억꾸에엑");
     
     printf_s("%d", Test);
     printf_s("\n");
