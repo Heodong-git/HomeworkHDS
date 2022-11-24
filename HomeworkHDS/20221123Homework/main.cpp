@@ -30,9 +30,9 @@ int MyStringCount(const char* _String)
     return Count;
 }
 
+
 int main()
 {
-    // 순서대로 5, 11, 8, 6 이 나오면 된다. 
     int Len0 = MyStringCount("aaaaa");
     int Len1 = MyStringCount("fasdjklfasd");
     int Len2 = MyStringCount("wew00000");   
