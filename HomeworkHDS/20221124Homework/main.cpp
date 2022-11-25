@@ -12,7 +12,7 @@ int StringCount(const char* _String)
     return Count;
 }
 
-// 문자열이 동일한지 확인 
+// 문자열이 같은지?
 bool StringCompair(const char* _Text0, const char* _Text1)
 {
     // 먼저 문자열의 길이가 같은지부터 체크한다
@@ -25,6 +25,8 @@ bool StringCompair(const char* _Text0, const char* _Text1)
         return false;
     }
     
+    // 문자열의 길이만큼 반복, 널문자를 제외한 길이가 10이라면
+    // 0 ~ 9 까지 총 10번반복한다. 
     for (int i = 0; i < First; ++i)
     {
         // 하나씩 비교하여 서로 다르다면 다른 문자열 인 것이다.
@@ -72,9 +74,8 @@ void StringMerge(char* _Result, const char* _Text0, const char* _Text1)
 
     // 모든 작업이 완료되었다면 결과값에 마지막 문자열에 0을 대입해서 끝을 알수 있도록 처리한다.
     _Result[ConnectIdx] = 0;
-
-    return;
 }
+
 
 void StringChange(char* _Text, const char* _Old, const char* _New)
 {
@@ -139,7 +140,7 @@ void StringChange(char* _Text, const char* _Old, const char* _New)
    
     }
     
-    // 그게 아니면 작업이 완료 되고 나면 뒤쪽 인덱스를 앞으로 채워준다. 
+    // 서로 텍스트 개수가 다르다면 작업이 완료 되고 나면 뒤쪽 인덱스를 앞으로 채워준다. 
     else
     {
         for (int i = 0; i < ChangeTextCount; ++i)
@@ -152,6 +153,7 @@ void StringChange(char* _Text, const char* _Old, const char* _New)
         {
             _Text[MoveIdx + i] = _Text[MoveIdx + i + 1];
             
+            // 문자열의 끝을 만나면 for 문 종료 
             if (_Text[MoveIdx + i] == 0)
                 break;
         }
@@ -198,6 +200,7 @@ void StringChangeEx(char* _Text, const char* _Old, const char* _New)
             {
                 if (_Text[ChangeIdx + j] == _Old[j])
                 {
+                    // 변경해야할 문자개수 추가
                     ++ChangeTextCount;
                 }
             }
@@ -206,38 +209,99 @@ void StringChangeEx(char* _Text, const char* _Old, const char* _New)
             break;
         }
     }
+    
+    // 문자열 길이체크 
+    bool Check = OldTextCount >= NewTextCount;
 
-    // 넣어줄 문자배열의 Index 값
-    int Count = 0;
-    // 이어서 붙여줘야할 문자의 시작인덱스 
-    int ConnectIdx = ChangeIdx + ChangeTextCount;
-
-    while (0 != _New[Count])
+    // true 라면 기존 텍스트가 더 길거나 같음
+    if (Check)
     {
-        _Text[ChangeIdx] = _New[Count];
+        // 새 문자열의 인덱스 값 
+        int NewIdx = 0;
 
-        ++ChangeIdx;
-        ++Count;
+        // ConnectIdx = 해당 인덱스부터 문자를 이어붙여준다. 
+        // 이어붙여줄 인덱스 = 바꿔줄 인덱스번호 + 변경해야할 문자개수 
+        int ConnectIdx = ChangeIdx + ChangeTextCount;
+
+        // 문자열의 끝을 만날때 까지 실행
+        while (0 != _New[NewIdx])
+        {
+            // 대입
+            _Text[ChangeIdx] = _New[NewIdx];
+
+            // 복사될 때마다 Index + 1
+            ++ChangeIdx;
+            ++NewIdx;
+        }
+
+        // 문자열의 끝을 만날때 까지 실행
+        while (0 != _Text[ConnectIdx])
+        {
+            // 대입
+            _Text[ChangeIdx] = _Text[ConnectIdx];
+
+            // 대입 될 때마다 Index + 1
+            ++ChangeIdx;
+            ++ConnectIdx;
+        }
+
+        // 작업이 모두 끝났다면 문자열이 모두 입력된 것이고 
+        // ChangeIdx 는 널문자가 들어갈 자리일 것이다. 0대입.
+        _Text[ChangeIdx] = 0;
     }
 
-    while (0 != _Text[ConnectIdx])
+    // 새로운 텍스트 문자열의 길이가 기존 문자열보다 길다면 아래 방식으로 진행
+    else
     {
-        _Text[ChangeIdx] = _Text[ConnectIdx];
+        // 넣어줄 문자배열의 Index 값
+        int Count = 0;
+        // 이어서 붙여줘야할 문자의 시작인덱스 
+        int ConnectIdx = ChangeIdx + ChangeTextCount;
 
-        ++ChangeIdx;
-        ++ConnectIdx;
+        // 변경될 문자열의 뒤쪽 문자열을 따로 저장해둔다. 
+        // ConnectIdx 부터 문자열의 끝까지 저장
+
+        int TextIdx = 0;
+        char Text[100] = {};
+
+        // 이어붙일 문자열을 따로 저장해두고
+        // 변경이 완료 되었기 때문에 끝난지점부터 다시 이어준다
+        while (0 != _Text[ConnectIdx])
+        {
+            Text[TextIdx] = _Text[ConnectIdx];
+            ++TextIdx;
+            ++ConnectIdx;
+        }
+
+        // 문자열 대입
+        while (0 != _New[Count])
+        {
+            _Text[ChangeIdx] = _New[Count];
+
+            ++ChangeIdx;
+            ++Count;
+        }
+
+        // 저장해두었던 문자열을 이어붙여준다. 
+        int TextCount = 0;
+        while (0 != Text[TextCount])
+        {
+            _Text[ChangeIdx] = Text[TextCount];
+            ++ChangeIdx;
+            ++TextCount;
+        }
+
+        // 코드가 여기까지 내려왔다면 모든 작업이 끝났기 때문에
+        // 마지막으로 변경된 인덱스 다음번째에 0을 넣어준다. 
+        // 현재 그다음 번째 인덱스 값으로 설정되어 있기 때문에 0 대입 
+        _Text[ChangeIdx] = 0;
     }
-
-    // 코드가 여기까지 내려왔다면 모든 작업이 끝났기 때문에
-    // 마지막으로 변경된 인덱스 다음번째에 0을 넣어준다. 
-    // 현재 그다음 번째 인덱스 값으로 설정되어 있기 때문에 0 대입 
-    _Text[ChangeIdx] = 0;
 }
 int main()
 {
     // StrngChange
     {
-        char Arr[20] = "aaa bbb ccc";
+        char Arr[100] = "aaa bbb ccc";
 
         StringChange(Arr, "bbb", "ddd");
         printf("StringChange : %s\n", Arr);
@@ -246,9 +310,9 @@ int main()
 
     // StringChangeEx 
     {
-        char Arr[20] = "aaa bbb check";
+        char Arr[100] = "aaa bbb check";
        
-        StringChangeEx(Arr, "bbb", "3");
+        StringChangeEx(Arr, "bbb", "Teㅁㄴㅇㄻㄴㅇ");
         printf("%s", "============================\n");
         printf("StringChangeEx : %s\n", Arr);
     }
