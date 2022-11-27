@@ -261,6 +261,7 @@ void StringChangeEx(char* _Text, const char* _Old, const char* _New)
         // 변경될 문자열의 뒤쪽 문자열을 따로 저장해둔다. 
         // ConnectIdx 부터 문자열의 끝까지 저장
 
+
         int TextIdx = 0;
         char Text[100] = {};
 
