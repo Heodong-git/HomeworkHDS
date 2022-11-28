@@ -74,6 +74,32 @@ void NumbertoString(char* _Ptr, int _Size, int _Value)
     _Ptr[CurIdx + 1] = 0;
 }
 
+// 코드 간소화해서 다시 만들어보기 
+void Myitoa(char* _Text, int _Size, int _Value)
+{
+    // 숫자의 길이
+    int Len = NumberCount(_Value);
+
+    int Div = 1;
+
+    // 자리수확인을 위해 나누어야할 값 
+    for (int i = 1; i < Len; ++i)
+    {
+        Div *= 10;
+    }
+
+    // 문자배열에 값 저장 
+    for (int i = 0; i < Len; ++i)
+    {
+        _Text[i] = _Value / Div + '0';
+        _Value -= (_Value / Div) * Div;
+        Div /= 10;
+    }
+
+    _Text[Len] = 0;
+}
+
+
 int main()
 {
 
@@ -87,7 +113,7 @@ int main()
         // 이 배열 안에 문자열로
         // '1300' 이 저장되어 있으면 된다. 
         char Arr[100] = {};
-        NumbertoString(Arr, 100, 1300);
+        Myitoa(Arr, 100, 1112330);
 
         // 이렇게 처리하면 12345가 문자로 나오면 됨. 
         printf_s(Arr);
