@@ -10,13 +10,19 @@ int NumberCount(int _Number)
     // 자리수를 뭘로 판단하지? 
     // 어떠한 자릿수의 값을 10으로 나눈다. 
     int Count = 0;
-    while (0 < _Number)
+    while (0 <= _Number)
     {
         // 계속 나눠진다면 자릿수가 더 길다는 의미, 나눠지지 않는다면
         // ex) 7 이라는 값이 들어왔다면 나눠지지 않기 때문에 Count 의 값이 1만 증가하여
         // 1자리수라는 의미가 된다. 
         _Number = _Number / 10;
         ++Count;
+
+        if (_Number == 0)
+        {
+            break;
+        }
+
     }
     
     return Count;
@@ -73,7 +79,7 @@ int main()
 
     {
         // 인자로 넣어준 정수값의 자리수 확인함수 
-        int Count = NumberCount(123132143);
+        int Count = NumberCount(1232123);
         int Value = 0;
     }
 
