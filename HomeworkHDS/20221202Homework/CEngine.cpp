@@ -41,7 +41,7 @@ void CEngine::Render()
 	}
 }
 
-// 플레이어,몬스터에 설정된 문자값으로 타일세팅 
+// 플레이어,몬스터, 불릿에 설정된 문자값으로 출력
 void CEngine::SetTile(const Int4& _Pos, char _Char)
 {
 	Int4 Pos = _Pos;

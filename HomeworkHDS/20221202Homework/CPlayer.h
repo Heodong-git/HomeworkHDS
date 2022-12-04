@@ -10,7 +10,7 @@ private:
 	Int4 Pos;
 
 	// 출력될 문자 (플레이어) 
-	char DisplayChar = '*';
+	char DisplayChar = 'P';
 
 public:
 	void Update(CEngine& _Engine);

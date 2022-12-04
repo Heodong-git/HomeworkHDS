@@ -13,7 +13,7 @@ private:
 	char DisplayChar = 'B';
 
 public:
-	void Update(CEngine& _Engine);
+	
 	// °ª¼¼ÆÃ
 	void SetPos(const Int4& _Pos) { Pos = _Pos; }
 	void SetDisplayChar(const char _char) { DisplayChar = _char; }

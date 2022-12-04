@@ -124,4 +124,9 @@ void CMonster::Update(CEngine& _Engine, CBullet& _Bullet)
 void CMonster::MonsterDamage(int _Damage)
 {
 	Hp -= _Damage;
+
+	if (Hp < 0)
+	{
+		Hp = 0;
+	}
 }

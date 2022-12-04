@@ -3,15 +3,13 @@
 #include "CPlayer.h"
 #include "CMonster.h"
 #include "CBullet.h"
-
 #include <windows.h>
-
 
 int main()
 {
 	// 플레이어이동 a, s, d, w
 	// 몬스터이동   j, k, l, i
-	// 총알 위치고정
+	// 총알 위치고정, SetPos 함수로 변경
 
 	// 객체생성
 	CEngine Engine;
