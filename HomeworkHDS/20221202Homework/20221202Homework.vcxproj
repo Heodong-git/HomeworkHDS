@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7c810939-8bc9-40e9-b428-e01120414c27}</ProjectGuid>
-    <RootNamespace>My20221118Homework</RootNamespace>
+    <ProjectGuid>{b7e1966f-d7a4-4536-a5e7-be8696b78516}</ProjectGuid>
+    <RootNamespace>My20221202Homework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,12 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CBullet.cpp" />
+    <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CPlayer.cpp" />
-    <ClCompile Include="소스.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBullet.h" />
+    <ClInclude Include="CEngine.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="ContentsMath.h" />
     <ClInclude Include="CPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

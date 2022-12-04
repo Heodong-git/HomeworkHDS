@@ -1,0 +1,68 @@
+#include <iostream>
+#include "CEngine.h"
+#include "CPlayer.h"
+#include "CMonster.h"
+#include "CBullet.h"
+
+#include <windows.h>
+
+
+int main()
+{
+	// 플레이어이동 a, s, d, w
+	// 몬스터이동   j, k, l, i
+	// 총알 위치고정
+
+	// 객체생성
+	CEngine Engine;
+	CPlayer NewPlayer;
+	CMonster NewMonster;
+	CBullet NewBullet;
+
+	// 객체별 값 세팅
+	Engine.Init();
+	Engine.SetMap('a');
+	Engine.Render();
+
+	NewPlayer.SetPos(Int4{ 2,2 });
+	NewMonster.SetPos(Int4{ 0,0 });
+	NewBullet.SetPos(Int4{ 2,1 });
+
+	// 플레이어,몬스터,총알 출력문자 세팅
+	/*NewPlayer.SetDisplayChar('3');
+	NewMonster.SetDisplayChar('1');
+	NewBullet.SetDisplayChar('5');*/
+
+	while (true)
+	{
+		system("cls");
+		
+		NewPlayer.Update(Engine);
+
+		// 몬스터데드상태가 아닐때만 동작 
+		if (!NewMonster.IsDead())
+		{
+			// 몬스터업데이트 
+			NewMonster.Update(Engine, NewBullet);
+		}
+
+		// 플레이어에 세팅된 값을 활용하여 맵세팅
+		Engine.SetTile(NewPlayer.GetPos(), NewPlayer.GetDisplayChar());
+
+		// 몬스터가 데드상태가 아닐때만 호출 
+		if (!NewMonster.IsDead())
+		{
+			// 맵에 출력 
+			Engine.SetTile(NewMonster.GetPos(), NewMonster.GetDisplayChar());
+			Engine.SetTile(NewBullet.GetPos(), NewBullet.GetDisplayChar());
+		}
+
+		// 화면출력
+		Engine.Render();
+
+		// 화면딜레이 
+		Sleep(400);
+	}
+
+	return 0;
+}

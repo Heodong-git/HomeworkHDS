@@ -2,6 +2,8 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+#include "CPlayer.h"
+#include "CMonster.h"
 
 int PlayerAtt = 20;
 int PlayerHp = 200;
@@ -53,17 +55,23 @@ void Damage(int _PlayerAtt, int _MonsterAtt)
 
 int main()
 {
+    CPlayer Player;
+    CMonster Monster;
+
     while (true)
     {
         // \n
         // int Value = system("D:\\AR45\\CPlusPlus\\x64\\Debug\\01.Program.exe");
         system("cls");
         
-        StatusRender("플레이어", MonsterAtt, PlayerHp);
-        StatusRender("몬스터", PlayerAtt, MonsterHp);
+        // 각 객체들의 정보 출력
+        // 함수를 활용해서 각 객체의 함수를 호출하는 방식으로 변경
+        Player.StatusRender();
+        Monster.StatusRender();
 
         int Value = _getch();
 
-        Damage(PlayerAtt, MonsterAtt);
+        Monster.Damage(Player.GetAtt());
+        Player.Damage(Monster.GetAtt());
     }
 }
