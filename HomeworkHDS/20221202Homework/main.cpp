@@ -8,8 +8,8 @@
 int main()
 {
 	// 플레이어이동 a, s, d, w
-	// 몬스터이동   j, k, l, i
-	// 총알 위치고정, SetPos 함수로 변경
+	// 몬스터 고정 , SetPos 함수로 위치변경
+	// 총알 이동   j, k, l, i 
 
 	// 객체생성
 	CEngine Engine;
@@ -20,7 +20,6 @@ int main()
 	// 객체별 값 세팅
 	Engine.Init();
 	Engine.SetMap('a');
-	Engine.Render();
 
 	NewPlayer.SetPos(Int4{ 2,2 });
 	NewMonster.SetPos(Int4{ 0,0 });
@@ -41,6 +40,7 @@ int main()
 		if (!NewMonster.IsDead())
 		{
 			// 몬스터업데이트 
+			NewBullet.Update(Engine, NewMonster);
 			NewMonster.Update(Engine, NewBullet);
 		}
 
@@ -57,6 +57,10 @@ int main()
 
 		// 화면출력
 		Engine.Render();
+
+		printf_s("\n");
+		printf_s("%s", "플레이어 이동 : A S D W\n");
+		printf_s("%s", "총알 이동     : J K L I\n");
 
 		// 화면딜레이 
 		Sleep(400);
