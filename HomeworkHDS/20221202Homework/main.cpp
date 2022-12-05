@@ -63,7 +63,7 @@ int main()
 		printf_s("%s", "√—æÀ ¿Ãµø     : J K L I\n");
 
 		// »≠∏ÈµÙ∑π¿Ã 
-		Sleep(400);
+		Sleep(300);
 	}
 
 	return 0;
