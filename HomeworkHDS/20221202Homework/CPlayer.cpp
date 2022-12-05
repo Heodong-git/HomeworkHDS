@@ -16,7 +16,7 @@ void CPlayer::Update(CEngine& _Engine)
 	// 누르고 나서 뭘 눌렀는지 알려주는 함수.
 	// 진짜 뭔가를 눌
 
-	// 키보드가 눌리지 않았다면 0 
+	// 키보드입력 버퍼의 사이즈가 0 이라면 false, 아니면 true( 키보드가 눌리지 않았다는 의미 ) 
 	if (0 == _kbhit())
 	{
 		return;
@@ -26,30 +26,25 @@ void CPlayer::Update(CEngine& _Engine)
 	// 눌린 값 저장 
 	int Input = _getch();
 
+	// 플레이어의 현재위치를 받아온다.
+	Int4 CurPos = GetPos();
+
 	// 눌린 값이 무엇이냐에 따라서 동작
+	// 생각해보니 스위치문 동작 이후에 수정해도 상관없을거같은데 
 	switch (Input)
 	{
 	case 'a':
 	case 'A':
 	{
-		// 플레이어의 현재위치를 받아온다.
-		Int4 CurPos = GetPos();
-
 		// 현재위치의 X 값이 0보다 작거나 같다면 이동하지 않는다.
 		if (0 >= CurPos.X)
 		{
 			//SetPos(CurPos);
 			return;
 		}
-
 		// 이동 
 		Move({ -1, 0 });
 		
-		// 이동 후 이전에 플레이어가 있던 위치를 기존에 세팅된 문자로 변경
-		const char Setchar = _Engine.GetChar();
-		// 플레이어가 이동하기전 위치를 받아놨기 때문에 그자리에 
-		// 맵에 세팅되어있는 문자값을 세팅한다. 
-		_Engine.SetTile(CurPos, Setchar);
 	}
 		break;
 	case 'w':
@@ -65,8 +60,6 @@ void CPlayer::Update(CEngine& _Engine)
 
 		Move({ 0, -1 });
 
-		const char Setchar = _Engine.GetChar();
-		_Engine.SetTile(CurPos, Setchar);
 	}
 		break;
 	case 's':
@@ -82,8 +75,6 @@ void CPlayer::Update(CEngine& _Engine)
 
 		Move({ 0, 1 });
 
-		const char Setchar = _Engine.GetChar();
-		_Engine.SetTile(CurPos, Setchar);
 	}
 		break;
 	case 'd':
@@ -98,11 +89,15 @@ void CPlayer::Update(CEngine& _Engine)
 		}
 		Move({ 1, 0 });
 
-		const char Setchar = _Engine.GetChar();
-		_Engine.SetTile(CurPos, Setchar);
 	}
 		break;
 	default:
 		break;
 	}
+
+	// 이동 후 이전에 플레이어가 있던 위치를 기존에 세팅된 문자로 변경
+	const char Setchar = _Engine.GetChar();
+	// 플레이어가 이동하기전 위치를 받아놨기 때문에 그자리에 
+	// 맵에 세팅되어있는 문자값을 세팅한다. 
+	_Engine.SetTile(CurPos, Setchar);
 }

@@ -115,7 +115,6 @@ void CBullet::Update(CEngine& _Engine, CMonster& _Monster)
 
 		// 현재위치에 엔진맵으로 사용된 문자값을 대입
 		const char MapText = _Engine.GetChar();
-
 		_Engine.SetTile(GetPos(), MapText);
 	}
 }
