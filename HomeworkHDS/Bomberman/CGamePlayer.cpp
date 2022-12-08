@@ -22,9 +22,12 @@ void CGamePlayer::Update(CConsoleGameScreen& _Screen)
 	// 눌린 키가 어떤 키냐에 따라 플레이어 이동
 	int Input = _getch();
 
+	// 현재플레이어의 위치를 받아온다. 
 	int4 CurPos = GetPos();
+	// 맵크기를 받아온다. 
 	int4 ScreenSize = _Screen.GetScreenSize();
 	
+	// 분기처리
 	switch (Input)
 	{
 	case'a':
