@@ -2,6 +2,7 @@
 #include "ConsoleGameMath.h"
 
 class CConsoleGameLine;
+
 typedef class CConsoleGameScreen
 {
 public:

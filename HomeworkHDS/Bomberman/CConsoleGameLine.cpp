@@ -30,13 +30,16 @@ void CConsoleGameLine::Init(const size_t _XSize, wchar_t _Char)
 		MessageBoxAssert("스크린 라인이 이미 생성되어 있습니다.");
 		return;
 	}
-	// X 사이즈를 저장
+
+	// X 사이즈 저장
 	m_XSize = _XSize;
+
+	// 출력문자 저장
 	m_BaseChar = _Char;
 
-	// 널문자를 삽입하기 위해 + 1 만큼 추가로 동적할당? 
+	// 널문자를 삽입하기 위해 + 1 만큼 추가로 동적할당
 	// new wchar_t[10]; 이라고 가정하면 11개를 할당하는거고.. 10번인덱스가 마지막이니까 거기에 0 ㅇㅇ ㅇㅋ
-	// 10개라면 11개 짜리 wchar_t 타입을 저장하는 배열.. 
+	// 10개라면 11개 짜리 wchar_t 타입을 저장하는 배열..  11개의 배열 22 바이트배열 
 	m_Arr = new wchar_t[_XSize + 1];
 
 	// 들어온 값만큼 반복해서 문자를 대입한다. 

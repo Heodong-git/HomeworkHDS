@@ -13,7 +13,7 @@ int main()
     // 메인 실행시 릭체크 함수 호출 
     LeakCheck();
 
-    g_Screen.Init(int4{ 10, 10 }, L'■');
+    g_Screen.Init(int4{ 8, 8 }, L'■');
     g_Player.SetPos(int4{ 0,0 });
     g_Player.SetRenderchar(L'★');
     
@@ -27,6 +27,7 @@ int main()
         // 플레이어 업데이트, 위치변동사항 적용 
         // 맵정보를 확인하여 변동사항 체크가 가능하도록 인자로 스크린 객체를 넣어준다. 
         g_Player.Update(g_Screen);
+
         g_Screen.SetPixel(g_Player.GetPos(), g_Player.GetRenderchar());
 
         // 변경점을 토대로 렌더링

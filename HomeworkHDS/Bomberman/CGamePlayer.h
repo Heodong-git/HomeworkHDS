@@ -31,7 +31,9 @@ public:
 	const wchar_t& GetRenderchar() { return m_RenderChar; }
 
 private:
+	// 위치
 	int4 m_Pos;
+	// 출력문자
 	wchar_t m_RenderChar;
 
 };

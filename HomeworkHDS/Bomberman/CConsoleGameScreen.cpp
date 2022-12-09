@@ -26,7 +26,7 @@ CConsoleGameScreen::~CConsoleGameScreen()
 
 void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
 {
-	// 예외처리, 현재 스크린이 만들어져 있다면 assert 처리
+	// 예외처리, 현재 라인이 생성되어 있다면 assert 처리
 	if (nullptr != m_Line)
 	{
 		MessageBoxAssert("스크린이 이미 생성되어 있습니다.");
@@ -47,7 +47,7 @@ void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
 	// 인덱스를 통한 접근이 가능
 	m_Line = new CConsoleGameLine[m_ScreenSize.Y];
 	
-	// X의 개수만큼 문자값을 넣어준다. 
+	// 스크린사이즈 Y 의 값만큼 반복
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
 		// 라인클래스의 초기화함수 호출, 인자로 스크린사이즈, 초기화할 문자를 넣어준다. 
@@ -87,7 +87,16 @@ void CConsoleGameScreen::SetPixel(const int4& _Pos, wchar_t _Char)
 	// 위에 if문에 걸리지 않았다면 아래 코드동작, 정상적으로 이동가능
 	
 	// 이걸 가능하게 하기 위해 오퍼레이터연산자 활용
+	// m_Line[_Pos.Y]; <--- 얘는 CConsoleGameLine[0] <---- 얘를 반환하고
+	// 얘는 CConsoleGameLine 클래스이기 때문에 오퍼레이터[] 함수를 호출하면 
+	// wchar_t& 타입의 본인이 소유한 m_Arr배열의 [ ? ] 번째 데이터를 반환한다. 
+
+	// 얘는 m_Arr[ ? ] 번째를 반환한다.  
+	// m_Line[0]
+	// 얘가누구야? CConsoleGameLine 클래스 타입 객체 
 	m_Line[_Pos.Y][_Pos.X] = _Char;
+
+	// wchar_t 
 }
 
 // 포지션이 맵을 벗어났는지?

@@ -23,7 +23,8 @@ void CGamePlayer::Update(CConsoleGameScreen& _Screen)
 	int Input = _getch();
 
 	// 현재플레이어의 위치를 받아온다. 
-	int4 CurPos = GetPos();
+	int4 CurPos = this->GetPos();
+
 	// 맵크기를 받아온다. 
 	int4 ScreenSize = _Screen.GetScreenSize();
 	
