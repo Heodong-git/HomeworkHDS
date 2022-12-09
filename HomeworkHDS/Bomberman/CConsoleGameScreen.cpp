@@ -12,7 +12,7 @@ CConsoleGameScreen::CConsoleGameScreen() :
 
 CConsoleGameScreen::~CConsoleGameScreen()
 {
-	// 동적할당한 메모리 제거
+	// 동적할당 된 메모리 제거
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
 		// 동적배열을 할당했기 때문에 동적배열 delete
@@ -26,7 +26,9 @@ CConsoleGameScreen::~CConsoleGameScreen()
 
 void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
 {
-	// 예외처리, 현재 라인이 생성되어 있다면 assert 처리
+	// 예외처리, 스크린을 한번 더 만들고자 한다면 현재로써는 
+	// 다시 만들 이유가 없기 때문에 어썰트처리(매크로함수) 
+	// 이후에 스크린을 다시 만들어야 된다면 코드 재작성
 	if (nullptr != m_Line)
 	{
 		MessageBoxAssert("스크린이 이미 생성되어 있습니다.");
@@ -36,21 +38,21 @@ void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
 	// 국가코드 지정
 	setlocale(LC_ALL, "KOR");
 
-	// 라인이 만들어져 있지 않다면 생성한다.
 	// 현재 스크린사이즈를 알 수 있도록 값 저장
 	m_ScreenSize = _ScreenSize;
 	// 마찬가지로 문자값 저장 
 	m_BaseChar = _Char;
 
-	// 동적배열 할당, 스크린사이즈 Y 개수만큼 
+	// 동적배열 할당 , 배열의 크기는 ScreenSize.Y 의 값만큼
 	// m_Line 변수는 힙영역에 할당된 동적배열의 시작주소값을 가지게 된다. 
 	// 인덱스를 통한 접근이 가능
 	m_Line = new CConsoleGameLine[m_ScreenSize.Y];
 	
-	// 스크린사이즈 Y 의 값만큼 반복
+	// ScreenSize.Y 의 값만큼 반복, GameLine 클래스의 초기화함수를 호출하여
+	// 내부적으로 가진 배열에 동적할당을 하여 이차원배열처럼 사용할 수 있도록 처리
+	// 생성한 배열에 X 축의 길이만큼 문자를 삽입한다. 
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
-		// 라인클래스의 초기화함수 호출, 인자로 스크린사이즈, 초기화할 문자를 넣어준다. 
 		m_Line[i].Init(m_ScreenSize.X, m_BaseChar);
 	}	
 }
@@ -61,10 +63,12 @@ void CConsoleGameScreen::Render()
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
 		m_Line[i].Render();
+		// 한줄 출력되었다면 엔터 
 		wprintf_s(L"\n");
 	}
 }
 
+// 모든 배열을 베이스 문자로 세팅, (잔상지우기) 
 void CConsoleGameScreen::Clear()
 {
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
@@ -87,13 +91,10 @@ void CConsoleGameScreen::SetPixel(const int4& _Pos, wchar_t _Char)
 	// 위에 if문에 걸리지 않았다면 아래 코드동작, 정상적으로 이동가능
 	
 	// 이걸 가능하게 하기 위해 오퍼레이터연산자 활용
-	// m_Line[_Pos.Y]; <--- 얘는 CConsoleGameLine[0] <---- 얘를 반환하고
-	// 얘는 CConsoleGameLine 클래스이기 때문에 오퍼레이터[] 함수를 호출하면 
+	// m_Line[_Pos.Y]; <--- 얘는 생성된 CConsoleGameLine 타입 배열의 N번째 녀석 <---- 얘를 반환하고
+	// 얘는 CConsoleGameLine 클래스이기 때문에  내부에 구현한 오퍼레이터[] 함수를 호출하면 
 	// wchar_t& 타입의 본인이 소유한 m_Arr배열의 [ ? ] 번째 데이터를 반환한다. 
 
-	// 얘는 m_Arr[ ? ] 번째를 반환한다.  
-	// m_Line[0]
-	// 얘가누구야? CConsoleGameLine 클래스 타입 객체 
 	m_Line[_Pos.Y][_Pos.X] = _Char;
 
 	// wchar_t 

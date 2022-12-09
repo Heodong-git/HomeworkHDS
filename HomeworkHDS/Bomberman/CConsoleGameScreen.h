@@ -23,9 +23,9 @@ public:
 
 	// 스크린 초기화
 	void Init(const int4& _ScreenSize, wchar_t _Char);
-	// 스크린 렌더
+	// 스크린 렌더링
 	void Render();
-	// 스크린 클리어
+	// 스크린 클리어 ( 맵출력문자를 기본문자로 세팅, 잔상을 지우기 위함 ) 
 	void Clear();
 	// 스크린 픽셀 값 세팅
 	void SetPixel(const int4& _Pos, wchar_t _Char);
@@ -38,9 +38,9 @@ protected:
 private:
 	// 스크린 크기
 	int4 m_ScreenSize;
-	// 스크린을 구성하기 위한 라인의 주소를 저장하기위한 변수
+	// 스크린을 구성하기 위한 라인클래스의 주소값을 저장하기위한 변수
 	CConsoleGameLine* m_Line;
-	// 스크린을 구성하는 문자가 무엇인지 받아둔다.
+	// 스크린을 구성하는 기본 문자를 저장하기 위한 변수 
 	wchar_t m_BaseChar;
 
 	// ==========================================================================
