@@ -33,7 +33,7 @@ int main()
 
         // 플레이어 업데이트, 위치변동사항 적용 
         // 맵정보를 확인하여 변동사항 체크가 가능하도록 인자로 스크린 객체를 넣어준다. 
-        g_Player.Update(g_Screen);
+        g_Player.Update();
 
         // 현재 플레이어의 위치, 플레이어의 출력문자를 받아와서 넣어준다. 
         g_Screen.SetPixel(g_Player.GetPos(), g_Player.GetRenderchar());

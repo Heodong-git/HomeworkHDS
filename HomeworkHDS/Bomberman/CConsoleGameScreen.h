@@ -19,7 +19,11 @@ public:
 	CConsoleGameScreen& operator=(CConsoleGameScreen&& _Other) noexcept = delete;
 
 	// 값반환
+
+	// 스크린사이즈 반환
 	const int4& GetScreenSize() { return m_ScreenSize; }
+	// 데이터영역에 존재하는 메인스크린의 주소값을 반환 
+	static CConsoleGameScreen* GetMainScreen() { return m_MainScreen; }
 
 	// 스크린 초기화
 	void Init(const int4& _ScreenSize, wchar_t _Char);
@@ -29,6 +33,9 @@ public:
 	void Clear();
 	// 스크린 픽셀 값 세팅
 	void SetPixel(const int4& _Pos, wchar_t _Char);
+
+	// 화면을 벗어났는지 확인
+	bool IsOver(int4 _Pos);
 
 	// 추후 상속을 배우고 사용, 클래스내부, 자식클래스 내부에서 사용가능
 protected:
@@ -42,10 +49,9 @@ private:
 	CConsoleGameLine* m_Line;
 	// 스크린을 구성하는 기본 문자를 저장하기 위한 변수 
 	wchar_t m_BaseChar;
+	static CConsoleGameScreen* m_MainScreen;
 
 	// ==========================================================================
 
-	// 화면을 벗어났는지 확인 , 클래스 내부에서 사용하기 때문에 private: 
-	bool IsOver(int4 _Pos);
 }CScreen;
 

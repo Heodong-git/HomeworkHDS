@@ -4,10 +4,15 @@
 #include <assert.h>
 #include <iostream>
 
+// 정적변수는 항상 cpp 최상단에 선언해주어야 사용가능 
+CConsoleGameScreen* CConsoleGameScreen::m_MainScreen = nullptr;
+
+// 생성자에서는 스크린객체 생성시 최초생성된 MainScreen인 자기 자신의 주소를 가질 수 있도록 대입한다. 
 CConsoleGameScreen::CConsoleGameScreen() :
 	m_Line(nullptr),
 	m_BaseChar(L'■')
 {
+	m_MainScreen = this;
 }
 
 CConsoleGameScreen::~CConsoleGameScreen()
@@ -94,7 +99,6 @@ void CConsoleGameScreen::SetPixel(const int4& _Pos, wchar_t _Char)
 	// m_Line[_Pos.Y]; <--- 얘는 생성된 CConsoleGameLine 타입 배열의 N번째 녀석 <---- 얘를 반환하고
 	// 얘는 CConsoleGameLine 클래스이기 때문에  내부에 구현한 오퍼레이터[] 함수를 호출하면 
 	// wchar_t& 타입의 본인이 소유한 m_Arr배열의 [ ? ] 번째 데이터를 반환한다. 
-
 	m_Line[_Pos.Y][_Pos.X] = _Char;
 
 	// wchar_t 

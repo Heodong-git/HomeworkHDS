@@ -11,7 +11,7 @@ CGamePlayer::~CGamePlayer()
 {
 }
 
-void CGamePlayer::Update(CConsoleGameScreen& _Screen)
+void CGamePlayer::Update()
 {
 	// 키보드입력 버퍼의 사이즈가 0 이라면 false, 아니면 true( 키보드가 눌리지 않았다는 의미 ) 
 	if (0 == _kbhit())
@@ -26,7 +26,7 @@ void CGamePlayer::Update(CConsoleGameScreen& _Screen)
 	int4 CurPos = this->GetPos();
 
 	// 맵크기를 받아온다. 
-	int4 ScreenSize = _Screen.GetScreenSize();
+	int4 ScreenSize = CConsoleGameScreen::GetMainScreen()->GetScreenSize();
 	
 	// 분기처리
 	switch (Input)
@@ -81,6 +81,12 @@ void CGamePlayer::Update(CConsoleGameScreen& _Screen)
 		break;
 	default:
 		break;
+	}
+
+	// 만약 배열을 벗어났다면 이전 위치로 변경해준다. 
+	if (true == CConsoleGameScreen::GetMainScreen()->IsOver(GetPos()))
+	{
+		SetPos(CurPos);
 	}
 }
 

@@ -24,6 +24,7 @@
     <ClCompile Include="..\Bomberman\CConsoleGameScreen.cpp" />
     <ClCompile Include="..\Bomberman\CGameEngineDebug.cpp" />
     <ClCompile Include="..\Bomberman\CGamePlayer.cpp" />
+    <ClCompile Include="CBomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Bomberman\CConsoleGameLine.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="..\Bomberman\CGameEngineDebug.h" />
     <ClInclude Include="..\Bomberman\CGamePlayer.h" />
     <ClInclude Include="..\Bomberman\ConsoleGameMath.h" />
+    <ClInclude Include="CBomb.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -118,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
