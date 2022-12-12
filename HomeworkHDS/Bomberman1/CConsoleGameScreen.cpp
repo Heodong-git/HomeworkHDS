@@ -3,6 +3,8 @@
 #include "CGameEngineDebug.h"
 #include <assert.h>
 #include <iostream>
+#include "CBomb.h"
+#include "CGamePlayer.h"
 
 // 정적변수는 항상 cpp 최상단에 선언해주어야 사용가능 
 CConsoleGameScreen* CConsoleGameScreen::m_MainScreen = nullptr;
@@ -10,7 +12,10 @@ CConsoleGameScreen* CConsoleGameScreen::m_MainScreen = nullptr;
 // 생성자에서는 스크린객체 생성시 최초생성된 MainScreen인 자기 자신의 주소를 가질 수 있도록 대입한다. 
 CConsoleGameScreen::CConsoleGameScreen() :
 	m_Line(nullptr),
-	m_BaseChar(L'■')
+	m_BaseChar(L'■'),
+	m_BombChar(L'◎'),
+	m_Player(nullptr),
+	m_PlayerBombInstallCount(0)
 {
 	m_MainScreen = this;
 }
@@ -21,12 +26,22 @@ CConsoleGameScreen::~CConsoleGameScreen()
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
 		// 동적배열을 할당했기 때문에 동적배열 delete
-		if (nullptr != m_Line) 
+		if (nullptr != m_Line)
 		{
 			delete[] m_Line;
 			m_Line = nullptr;
 		}
 	}
+}
+
+const wchar_t& CConsoleGameScreen::GetBombRenderChar()
+{
+	return m_BombChar;
+}
+
+const wchar_t& CConsoleGameScreen::GetRenderChar(const int4& _Pos)
+{
+	return m_Line[_Pos.Y][_Pos.X];
 }
 
 void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
@@ -52,14 +67,14 @@ void CConsoleGameScreen::Init(const int4& _ScreenSize, wchar_t _Char)
 	// m_Line 변수는 힙영역에 할당된 동적배열의 시작주소값을 가지게 된다. 
 	// 인덱스를 통한 접근이 가능
 	m_Line = new CConsoleGameLine[m_ScreenSize.Y];
-	
+
 	// ScreenSize.Y 의 값만큼 반복, GameLine 클래스의 초기화함수를 호출하여
 	// 내부적으로 가진 배열에 동적할당을 하여 이차원배열처럼 사용할 수 있도록 처리
 	// 생성한 배열에 X 축의 길이만큼 문자를 삽입한다. 
 	for (size_t i = 0; i < m_ScreenSize.Y; i++)
 	{
 		m_Line[i].Init(m_ScreenSize.X, m_BaseChar);
-	}	
+	}
 }
 
 void CConsoleGameScreen::Render()
@@ -71,6 +86,10 @@ void CConsoleGameScreen::Render()
 		// 한줄 출력되었다면 엔터 
 		wprintf_s(L"\n");
 	}
+
+	std::cout << std::endl;
+	printf_s("폭탄설치 : X\n");
+	printf_s("게임종료 : Q\n");
 }
 
 // 모든 배열을 베이스 문자로 세팅, (잔상지우기) 
@@ -92,9 +111,9 @@ void CConsoleGameScreen::SetPixel(const int4& _Pos, wchar_t _Char)
 		MessageBoxAssert("스크린의 범위를 벗어납니다.");
 		return;
 	}
-	
+
 	// 위에 if문에 걸리지 않았다면 아래 코드동작, 정상적으로 이동가능
-	
+
 	// 이걸 가능하게 하기 위해 오퍼레이터연산자 활용
 	// m_Line[_Pos.Y]; <--- 얘는 생성된 CConsoleGameLine 타입 배열의 N번째 녀석 <---- 얘를 반환하고
 	// 얘는 CConsoleGameLine 클래스이기 때문에  내부에 구현한 오퍼레이터[] 함수를 호출하면 
@@ -104,33 +123,70 @@ void CConsoleGameScreen::SetPixel(const int4& _Pos, wchar_t _Char)
 	// wchar_t 
 }
 
+void CConsoleGameScreen::SetPixel(CBomb** const _Bomb, const int _BombCount)
+{
+	// 현재 플레이어가 가진 폭탄의 개수만큼 맵에 폭탄을 세팅해준다. 
+	for (size_t i = 0; i < _BombCount; ++i)
+	{
+
+		if (IsOver(_Bomb[i]->GetPos()))
+		{
+			return;
+		}
+
+		m_Line[_Bomb[i]->GetPos().Y][_Bomb[i]->GetPos().X] = _Bomb[i]->GetRenderchar();		
+	}
+}
+
+
+
 // 포지션이 맵을 벗어났는지?
 bool CConsoleGameScreen::IsOver(int4 _Pos)
 {
 	if (0 > _Pos.X)
 	{
 		MessageBoxAssert("X축 좌표가 0보다 작습니다.")
-		return true;
+			return true;
 	}
 
 	if (0 > _Pos.Y)
 	{
 		MessageBoxAssert("Y축 좌표가 0보다 작습니다.")
-		return true;
+			return true;
 	}
 
 	if (m_ScreenSize.X <= _Pos.X)
 	{
 		MessageBoxAssert("X축 좌표가 X축 최대 크기보다 큽니다.")
-		return true;
+			return true;
 	}
 
 	if (m_ScreenSize.Y <= _Pos.Y)
 	{
 		MessageBoxAssert("X축 좌표가 0보다 작습니다.")
-		return true;
+			return true;
 	}
 
 	// 모두 해당되지 않는다면 화면을 벗어나지 않은 것.
 	return false;
+}
+
+int CConsoleGameScreen::PlayerBombInstallCount()
+{
+	int Count = 0;
+	const wchar_t PlayerChar = m_Player->GetRenderchar();
+	
+	// 문자를 하나하나 확인
+	for (size_t y = 0; y < m_ScreenSize.Y; ++y)
+	{
+		for (size_t x = 0; x < m_ScreenSize.X; ++x)
+		{
+			if (m_Line[y][x] == PlayerChar)
+			{
+				++Count;
+			}
+		}
+	}
+
+	return Count;
 }

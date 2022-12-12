@@ -45,7 +45,7 @@ void CConsoleGameLine::Init(const size_t _XSize, wchar_t _Char)
 	// 들어온 값만큼 반복해서 문자를 대입한다. 
 	for (size_t i = 0; i < m_XSize; i++)
 	{
-		m_Arr[i] = _Char;	
+		m_Arr[i] = _Char;
 	}
 
 	// 마지막에 널문자를 삽입하여 문자열의 끝을 알 수 있도록 처리해준다. 
@@ -77,13 +77,13 @@ wchar_t& CConsoleGameLine::operator[](size_t _Index)
 	{
 		// 인덱스의 값이 0보다 작다면 인덱스보다 작은 값을 넣은 것이다.
 		MessageBoxAssert("Index 의 값을 0보다 작은 값을 입력하였습니다.")
-		return ErrorCode;
+			return ErrorCode;
 	}
 
 	if (m_XSize <= _Index)
 	{
 		MessageBoxAssert("Index 의 값이 최대 값보다 큰 값이 입력되었습니다.")
-		return ErrorCode;
+			return ErrorCode;
 	}
 
 	// 위 조건문에 걸리지 않았다면 값을 반환한다.

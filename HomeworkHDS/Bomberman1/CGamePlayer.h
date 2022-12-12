@@ -1,9 +1,10 @@
 #pragma once
-#include "ConsoleGameMath.h"
+#include "CConsoleGameMath.h"
 
 // 클래스 전방선언, 이런 클래스가 존재 할 것이다~ 
 // 직접 객체를 사용하는 것은 불가능, 포인터변수를 선언할 수 있음 
 class CConsoleGameScreen;
+class CBomb;
 
 class CGamePlayer
 {
@@ -22,23 +23,44 @@ public:
 
 public:
 	// 업데이트
-	void Update();
+	bool Update();
 
 	void Move(const int4& _Pos) { m_Pos += _Pos; };
-	
+
 	// 값 세팅
+	void Init(const int4& _ScreenSize);
 	void SetPos(const int4& _Pos) { m_Pos = _Pos; }
 	void SetRenderchar(const wchar_t _Char) { m_RenderChar = _Char; }
+	void MinusInstallCount();
 
 	// 값 반환
 	const int4& GetPos() { return m_Pos; }
 	const wchar_t& GetRenderchar() { return m_RenderChar; }
+	CBomb** GetBombArr();
+	const int GetCurBombCount() { return m_CurBombCount; }
+	const int GetMaxBombCount() { return m_MaxBombCount; }
+	const int GetCurBombIdx() { return m_CurBombIdx;  }
+	int& GetInstallationCount() { return m_InstallationCount; }
+
+	bool BombOverlapCheck();
+	bool LeftBombCheck();
+	bool RightBombCheck();
+	bool UpBombCheck();
+	bool DownBombCheck();
 
 private:
 	// 위치
 	int4 m_Pos;
 	// 출력문자
 	wchar_t m_RenderChar;
+
+	// 폭탄을 저장할 배열, 스크린이 먼저 만들어지기 때문에
+	// 이 주소값에 폭탄을 저장할 동적배열을 할당한다. 최대개수는 맵가로 * 세로로 하면 될 것 같은데?
+	CBomb** m_BombArr;
+	int m_MaxBombCount;
+	int m_CurBombCount;
+	int m_InstallationCount;
+	int m_CurBombIdx;
 };
 
 
@@ -54,10 +76,10 @@ private:
 
 
 // 0. 게임스크린은 정적변수로 선언해서 사용
-// 1. 폭탄 생성 후, 폭탄 릭 제거
-// 2. 폭탄 여러개 나오게 하기
-// 3. 플레이어가 폭탄을 못지나가게 하기  
-// 4. 폭탄이 일정 시간 후에 사라지게 하기
+// 1. 폭탄 생성 후, 폭탄 릭 제거 ㅇㅇ
+// 2. 폭탄 여러개 나오게 하기    ㅇㅇ
+// 3. 플레이어가 폭탄을 못지나가게 하기 ㅇㅇ 
+// 4. 폭탄이 일정 시간 후에 사라지게 하기 업데이트에서 일정시간이 지나면 제거 (지워지긴지워지는데...)
 
 
 // 일단 Bomb 만들어 
