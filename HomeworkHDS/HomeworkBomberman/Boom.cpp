@@ -22,11 +22,7 @@ Boom::~Boom()
 
 void Boom::Update()
 {
-	if (FireTime > 16)
-	{
-		Fire = false;
-	}
-
+	
 	// 업데이트 함수가 호출되면
 	// if문을 검사하면서 시간이 줄어들게 되고 0이하가 되면 if문의 코드가 실행된다. 
 	// Boom 클래스의 bool 변수 Fire는 false 상태이며 if문 진입시 true 로 변경되고 폭발코드 실행
@@ -38,9 +34,7 @@ void Boom::Update()
 
 		// 폭탄이 터지는 위치에 다른 폭탄이 있다면 SetDeath;
 		// 폭탄배열을 가져와서 위치를받아온 후 현재 폭탄이 터지는 위치에 폭탄이 있을경우
-		Player* Player = GetOwner();
-		Boom* ArrBoom = Player->GetBoomArr();
-
+	
 			// 폭발범위체크는 어떻게 할 것인가? 
 			int4 BoomPos = GetPos();
 	
@@ -115,8 +109,8 @@ void Boom::Update()
 	//   ★
 
 	// 1. 쾅쾅쾅쾅을 만들어 오세요.
-	// 1-1. 왼쪽 오른쪽 위 아래에 1개만이라도 보이게 해라. ㅇㅇ.
-	// 1-2. 그냥 범위크기 전체로 보이게 만들어라.			ㅇㅇ.
+	// 1-1. 왼쪽 오른쪽 위 아래에 1개만이라도 보이게 해라.
+	// 1-2. 그냥 범위크기 전체로 보이게 만들어라.			
 	// 1-3. 시간차로 범위가 보이게 만들어라.
 	// 
 	// 십자가 표시로 먼저 나오게 하세요.
@@ -128,34 +122,15 @@ void Boom::Update()
 
 void Boom::BoomCheck(const int _Range)
 {
-	const int CurRange = _Range;
 	Player* Player = GetOwner();
 	Boom* ArrBoom = Player->GetBoomArr();
 	int4 CurPos = GetPos();
 
 	for (size_t i = 0; i < (size_t)(Player->GetBoomUseCount()); i++)
 	{
-		if (ArrBoom[i].GetPos() == CurPos + int4{ Range , 0 })
+		for (int CurRange = 1; CurRange < _Range + 1; ++CurRange)
 		{
-			ArrBoom[i].SetDeath();
-		}
-
-		if (ArrBoom[i].GetPos() == CurPos + int4{ Range , 0 })
-		{
-			{
-				ArrBoom[i].SetDeath();
-			}
-		}
-
-		if (ArrBoom[i].GetPos() == CurPos + int4{ Range , 0 })
-		{
-			{
-				ArrBoom[i].SetDeath();
-			}
-		}
-
-		if (ArrBoom[i].GetPos() == CurPos + int4{ Range , 0 })
-		{
+			if (ArrBoom[i].GetPos() == CurPos + int4{ CurRange , 0 })
 			{
 				ArrBoom[i].SetDeath();
 			}
