@@ -49,18 +49,18 @@ bool CGamePlayer::Update()
 {
 	// 키보드입력 버퍼의 사이즈가 0 이라면 false, 아니면 true( 키보드가 눌리지 않았다는 의미 ) 
 	if (0 == _kbhit())
-	{
+	{ 
+		CConsoleGameScreen::GetMainScreen()->SetPixel(GetPos(), GetRenderchar());
 		return true;
 	}
 
 	// 눌린 키가 어떤 키냐에 따라 플레이어 이동
 	int Input = _getch();
 
-	// 현재플레이어의 위치를 받아온다. 
-	int4 CurPos = this->GetPos();
+	// 플레이어가 이동해야할 위치를 받아온다. 
+	int4 NextPos = GetPos();
 
 	// 맵크기를 받아온다. 
-	int4 ScreenSize = CConsoleGameScreen::GetMainScreen()->GetScreenSize();
 
 	// 분기처리
 	switch (Input)
@@ -68,68 +68,47 @@ bool CGamePlayer::Update()
 	case'a':
 	case'A':
 	{
-		// 현재 플레이어의 X 좌표가 0보다 작거나 같다면 움직이지 않음
-		if (0 >= CurPos.X)
-		{
-			break;
-		}
-		
 		if (LeftBombCheck())
 		{
 			break;
 		}
 
-		Move(int4{ -1,0 });
+		NextPos += { -1, 0};
 	}
 	break;
 	case's':
 	case'S':
 	{
-		// 배열의 최대크기보다 현재플레이어의 X좌표가 더 크거나 같다면 움직이지 않는다. 
-		if (ScreenSize.X - 1 <= CurPos.Y)
-		{
-			break;
-		}
 
 		if (DownBombCheck())
 		{
 			break;
 		}
 
-		Move(int4{ 0,1 });
+		NextPos += { 0, 1};
 	}
 	break;
 	case'd':
 	case'D':
 	{
-		// 배열의 최대크기보다 현재플레이어의 X좌표가 더 크거나 같다면 움직이지 않는다. 
-		if (ScreenSize.X - 1 <= CurPos.X)
-		{
-			break;
-		}
-
+		
 		if (RightBombCheck())
 		{
 			break;
 		}
-		Move(int4{ 1,0 });
+		NextPos += { 1, 0};
 	}
 	break;
 	case'w':
 	case'W':
 	{
-		// 현재 플레이어의 Y 좌표가 0보다 작거나 같다면 움직이지 않는다. 
-		if (0 >= CurPos.Y)
-		{
-			break;
-		}
-
+	
 		if (UpBombCheck())
 		{
 			break;
 		}
 
-		Move(int4{ 0,-1 });
+		NextPos += { 0, -1};
 	}
 	break;
 	case'x':
@@ -171,11 +150,12 @@ bool CGamePlayer::Update()
 		break;
 	}
 
-	// 만약 배열을 벗어났다면 이전 위치로 변경해준다. 
-	if (true == CConsoleGameScreen::GetMainScreen()->IsOver(GetPos()))
+	// 배열을 벗어나지 않았을 경우에만 이동시켜준다.  
+	if (false == CConsoleGameScreen::GetMainScreen()->IsOver(NextPos))
 	{
-		SetPos(CurPos);
+		SetPos(NextPos);
 	}
+
 	return true;
 }
 

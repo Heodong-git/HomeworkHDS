@@ -4,6 +4,7 @@
 #include "CGamePlayer.h"
 #include "CBomb.h"
 #include <iostream>
+
 // 프로그램 종료시 까지 메모리가 해제되지 않을 것이기 때문에 전역에 선언
 CConsoleGameScreen g_Screen;
 CGamePlayer        g_Player;
