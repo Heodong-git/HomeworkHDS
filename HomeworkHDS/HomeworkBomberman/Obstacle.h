@@ -26,10 +26,10 @@ public:
 public:
 	void Init(const int4 _Size);
 	void Update();
-	Obstacle* GetObstacleArr() { return m_ObstacleArr; }
+	Obstacle* GetObstacleArr() { return m_BasicObstacleArr; }
 
 public:
-	Obstacle* m_ObstacleArr = nullptr;
+	Obstacle* m_BasicObstacleArr = nullptr;
 	int4 m_ScreenSize;
 	int m_ObstacleSize = 0;
 };
