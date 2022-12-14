@@ -128,21 +128,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boom.cpp" />
-    <ClCompile Include="BoomExplosion.cpp" />
     <ClCompile Include="ConsoleGameMath.cpp" />
     <ClCompile Include="ConsoleGameObject.cpp" />
     <ClCompile Include="ConsoleGameScreen.cpp" />
     <ClCompile Include="GameEngineDebug.cpp" />
     <ClCompile Include="HomeworkBomberman.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boom.h" />
-    <ClInclude Include="BoomExplosion.h" />
     <ClInclude Include="ConsoleGameMath.h" />
     <ClInclude Include="ConsoleGameObject.h" />
     <ClInclude Include="ConsoleGameScreen.h" />
     <ClInclude Include="GameEngineDebug.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

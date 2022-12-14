@@ -28,18 +28,16 @@ public:
 		return 0 > Time;
 	}
 
-	void SetDeath() { Fire = true; }
 	void SetOwner(Player* _Owner) { Owner = _Owner; }
 	Player* const GetOwner() { return Owner; }
-	void BoomCheck(const int _Range);
+	void BoomCheck(const int4& _Pos);
 
 protected:
 
 private:
 	Player* Owner = nullptr;
-	BoomExplosion* ArrBoomExplosion;
-	bool Fire = false;
 	int Time = 20;
+	int Delay = 0;
 	int Range = 3;
 	int FireTime = 0;
 };

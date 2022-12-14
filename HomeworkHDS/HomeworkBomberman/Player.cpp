@@ -3,12 +3,14 @@
 #include "ConsoleGameScreen.h"
 #include "GameEngineDebug.h"
 #include "Boom.h"
+#include "Obstacle.h"
 
 Player::Player()
 {
 	ArrBoomObject = new Boom[10000]();
 
 	SetRenderChar(L'＠');
+	SetPos(int4{ 7, 5 });
 }
 
 Player::~Player()
@@ -95,12 +97,14 @@ bool Player::Update()
 	bool IsMove = true;
 
 	// 플레이어가 화면 바깥으로 나갔다면 이동하지 못하게 한다.
-	// 화면 바깥으로 나갔다면
-	if (true == ConsoleGameScreen::GetMainScreen()->IsOver(NextPos))
+	// 화면 바깥으로 나갔다면 , 다음 이동위치에 장애물이 있다면 이동불가
+	if (true == ConsoleGameScreen::GetMainScreen()->IsOver(NextPos) ||
+		true == ConsoleGameScreen::GetMainScreen()->IsObstacle(NextPos))
 	{
 		// 이동불가
 		IsMove = false;
 	}
+
 
 	// 폭탄들을 전부다 검사해서 만약 나의 이동위치에 폭탄이 있다면 이동하지 않는다.
 	for (size_t i = 0; i < BoomUseCount; i++)
@@ -120,11 +124,6 @@ bool Player::Update()
 	}
 
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
-
-
-
-
-
 
 	return true;
 }

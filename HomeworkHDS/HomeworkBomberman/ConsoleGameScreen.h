@@ -18,6 +18,7 @@ public:
 	~ConsoleGameLine();
 };
 
+
 // Ό³Έν :
 class ConsoleGameScreen
 {
@@ -49,6 +50,8 @@ public:
 	void ScreenClear();
 
 	bool IsOver(int4 _Pos);
+	bool IsObstacle(int4 _Pos);
+	wchar_t IsRenderchar(int4 _Pos);
 
 protected:
 

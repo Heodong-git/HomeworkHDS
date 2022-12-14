@@ -20,7 +20,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
-    <ClCompile Include="BoomExplosion.cpp">
+    <ClCompile Include="Obstacle.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,7 +54,7 @@
     <ClInclude Include="Player.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
-    <ClInclude Include="BoomExplosion.h">
+    <ClInclude Include="Obstacle.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
   </ItemGroup>

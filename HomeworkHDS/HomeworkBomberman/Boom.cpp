@@ -5,103 +5,67 @@
 #include "Player.h"
 #include <Windows.h>
 #include "BoomExplosion.h"
+#include "Obstacle.h"
+
 Boom::Boom()
 {
 	SetRenderChar(L'◎');
-	ArrBoomExplosion = new BoomExplosion[100];
 }
 
 Boom::~Boom()
 {
-	if (nullptr != ArrBoomExplosion)
-	{
-		delete[] ArrBoomExplosion;
-		ArrBoomExplosion = nullptr;
-	}
+
 }
 
 void Boom::Update()
 {
-	
-	// 업데이트 함수가 호출되면
-	// if문을 검사하면서 시간이 줄어들게 되고 0이하가 되면 if문의 코드가 실행된다. 
-	// Boom 클래스의 bool 변수 Fire는 false 상태이며 if문 진입시 true 로 변경되고 폭발코드 실행
-	if (0 > --Time || Fire == true)
+	if (0 > Time)
 	{
-		
-		// 폭발이 지속되는 시간체크를 위해 지속적인 값증가
-		++FireTime;
-
-		// 폭탄이 터지는 위치에 다른 폭탄이 있다면 SetDeath;
-		// 폭탄배열을 가져와서 위치를받아온 후 현재 폭탄이 터지는 위치에 폭탄이 있을경우
-	
-			// 폭발범위체크는 어떻게 할 것인가? 
-			int4 BoomPos = GetPos();
-	
-			// FireTime 변수가 1보다 같거나크고 5보다 작을때는 1의 범위만큼
-			if (0 < FireTime && 5 >= FireTime)
-			{
-				// 범위만큼 반복실행, 폭탄 주변을 범위만큼 하트로 출력되게 한다.
-				Range = 1;
-
-				// FireTime 의 조건이 만족하는 동안 해당하는 위치는 하트로 출력
-				// 이걸 붐익스플로전으로 바꾸고 걔의 위치를 받아와서 출력하는걸로
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-				BoomCheck(Range);
-			}
-
-			// FireTime 변수가 5보다 크고 10보다 작을땐 2의범위까지 
-			if (5 < FireTime && 10 > FireTime)
-			{
-				Range = 1;
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-
-				BoomCheck(Range);
-
-				Range = 2;
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-
-				BoomCheck(Range);
-			}
-
-			if (15 > FireTime && 10 < FireTime)
-			{
-				Range = 1;
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-
-				BoomCheck(Range);
-
-				Range = 2;
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-
-				BoomCheck(Range);
-
-				Range = 3;
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ Range , 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ -Range, 0 }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, Range }, L'♥');
-				ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos + int4{ 0, -Range }, L'♥');
-
-				BoomCheck(Range);
-			}
-		return;
+		return; 
 	}
 
+	// 타임 - 딜레이가 0 보다 작을 경우에 동작하는 코드, 폭발 
+	if (0 > --Time - Delay)
+	{
+		int4 BoomPos = GetPos();
+
+		for (int i = 1; i < Range + 1; i++)
+		{
+			int4 LeftPos = BoomPos + int4{ -i , 0 };
+
+			if (false == ConsoleGameScreen::GetMainScreen()->IsOver(LeftPos))
+			{
+				// 그 배열의 위치에 있는 출력문자가 장애물이라면? 
+				/*if (ConsoleGameScreen::GetMainScreen()->IsRenderchar(LeftPos) ==
+					Obstacle::GetObstacle()->GetRenderChar())
+				{
+					
+				}*/
+				BoomCheck(LeftPos);
+			    ConsoleGameScreen::GetMainScreen()->SetPixelChar(LeftPos, L'♥');
+			}
+			int4 RightPos = BoomPos + int4{ i , 0 };
+			if (false == ConsoleGameScreen::GetMainScreen()->IsOver(RightPos))
+			{
+				BoomCheck(RightPos);
+				ConsoleGameScreen::GetMainScreen()->SetPixelChar(RightPos, L'♥');
+			}
+			int4 UpPos = BoomPos + int4{ 0, -i };
+			if (false == ConsoleGameScreen::GetMainScreen()->IsOver(UpPos))
+			{
+				BoomCheck(UpPos);
+				ConsoleGameScreen::GetMainScreen()->SetPixelChar(UpPos, L'♥');
+			}
+			int4 DownPos = BoomPos + int4{ 0, i };
+			if (false == ConsoleGameScreen::GetMainScreen()->IsOver(DownPos))
+			{
+				BoomCheck(DownPos);
+				ConsoleGameScreen::GetMainScreen()->SetPixelChar(DownPos, L'♥');
+			}
+		}
+
+		return;
+	}
 	//   ★
 	//   ★
 	//★★◎★★
@@ -114,26 +78,29 @@ void Boom::Update()
 	// 1-3. 시간차로 범위가 보이게 만들어라.
 	// 
 	// 십자가 표시로 먼저 나오게 하세요.
-
-
 	// 2. 쾅쾅쾅쾅범위에 다른 폭탄이 있으면 개도 쾅쾅쾅쾅.
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
 }
 
-void Boom::BoomCheck(const int _Range)
+// 이런걸 할필요가 없었다 !!
+void Boom::BoomCheck(const int4& _Pos)
 {
+	// 플레이어를 받아온다. 
 	Player* Player = GetOwner();
+	// 플레이어가 소유한 붐배열을 받아온다. 
 	Boom* ArrBoom = Player->GetBoomArr();
-	int4 CurPos = GetPos();
+	// 현재 플레이어가 설치한 폭탄의 개수를 받아온다. 
+	int PlayerUseBoomCount = Player->GetBoomUseCount();
+	// 현재폭탄의 위치를 받아온다
+	int4 FirePos = _Pos;
 
-	for (size_t i = 0; i < (size_t)(Player->GetBoomUseCount()); i++)
+	// 플레이어가 설치한 폭탄의 개수만큼 반복
+	for (int i = 0; i < PlayerUseBoomCount; i++)
 	{
-		for (int CurRange = 1; CurRange < _Range + 1; ++CurRange)
+		// 현재 폭탄이 폭발하는 위치와 같은 위치에 존재하는 폭탄이 있다면 
+		if (FirePos == ArrBoom[i].GetPos())
 		{
-			if (ArrBoom[i].GetPos() == CurPos + int4{ CurRange , 0 })
-			{
-				ArrBoom[i].SetDeath();
-			}
+				ArrBoom[i].Delay = 20;	
 		}
 	}
 }

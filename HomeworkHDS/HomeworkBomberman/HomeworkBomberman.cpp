@@ -2,11 +2,13 @@
 #include "ConsoleGameScreen.h"
 #include "Player.h"
 #include "GameEngineDebug.h"
+#include "Obstacle.h"
 #include <conio.h>
 
 ConsoleGameScreen Screen;
 // 이렇게 생성해도 됩니다.
 Player MainPlayer;
+Obstacle MainObstacle;
 
 // 1. 폭탄 릭을 없애오세요.
 // 2. 폭탄을 여러개 설치하게 만드세요.
@@ -20,8 +22,8 @@ int main()
     LeckCheck();
 
     // 지역변수로 만들어졌어.
-    Screen.ScreenInit({ 15, 10 }, L'■');
-
+    Screen.ScreenInit({ 15, 11 }, L'■');
+    MainObstacle.Init({ 15, 11 });
     // 
 
     // ■■
@@ -38,8 +40,9 @@ int main()
         Screen.ScreenClear();
 
 
+        
+        MainObstacle.Update();
         bool End = MainPlayer.Update();
-
         // Ao
         // AA
 

@@ -1,5 +1,6 @@
 #include "ConsoleGameScreen.h"
 #include <iostream>
+#include "Obstacle.h"
 ///////////////////////// ConsoleGameLine 
 
 ConsoleGameLine::~ConsoleGameLine()
@@ -132,6 +133,24 @@ bool ConsoleGameScreen::IsOver(int4 _Pos)
 	}
 
 	return false;
+}
+
+bool ConsoleGameScreen::IsObstacle(int4 _Pos)
+{
+
+	wchar_t Renderchar = Obstacle::GetObstacle()->GetRenderChar();
+
+	if (Lines[_Pos.Y][_Pos.X] == Renderchar)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+wchar_t ConsoleGameScreen::IsRenderchar(int4 _Pos)
+{
+	return Lines[_Pos.Y][_Pos.X];
 }
 
 void ConsoleGameScreen::SetPixelChar(int4 _Pos, wchar_t _Char)

@@ -15,7 +15,6 @@ public:
 	ConsoleGameObject& operator=(const ConsoleGameObject& _Other) = delete;
 	ConsoleGameObject& operator=(ConsoleGameObject&& _Other) noexcept = delete;
 
-
 	int4 GetPos()
 	{
 		return Pos;
