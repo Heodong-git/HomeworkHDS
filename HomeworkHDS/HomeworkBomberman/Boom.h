@@ -37,8 +37,7 @@ protected:
 private:
 	Player* Owner = nullptr;
 	int Time = 20;
-	int Delay = 0;
+	int CurRange = 0;
 	int Range = 3;
-	int FireTime = 0;
 };
 

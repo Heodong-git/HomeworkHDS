@@ -1,11 +1,12 @@
 #pragma once
 #include "ConsoleGameMath.h"
 #include "GameEngineDebug.h"
+#include <vector>
 
 class ConsoleGameLine
 {
 	wchar_t* Arr = nullptr;
-	wchar_t BaseChar;
+	wchar_t BaseChar = L'□';
 	size_t XCount = 0;
 
 public:
@@ -59,9 +60,10 @@ protected:
 private:
 
 	// 사용하지 않았다를 *에는 nullptr을 넣어서 표현합니다. 
+	// 
 	ConsoleGameLine* Lines = nullptr;
 	int4 ScreenSize;
-	wchar_t BaseChar = '□';
+	wchar_t BaseChar = L'□';
 
 	// 4 5
 

@@ -21,8 +21,6 @@ int main()
 {
     LeckCheck();
 
-    CArray<int> Test;
-
     // 지역변수로 만들어졌어.
     Screen.ScreenInit({ 15, 11 }, L'■');
     MainObstacle.Init({ 15, 11 });
