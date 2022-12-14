@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{02772f3e-80fb-4c14-8dc4-0d2412ee8aaf}</ProjectGuid>
-    <RootNamespace>Bomberman1</RootNamespace>
+    <ProjectGuid>{82f35a5c-c89e-498c-8eaf-7a177c5ad39e}</ProjectGuid>
+    <RootNamespace>My20221214HomworkArray</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,7 +40,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -127,20 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bomberman1.cpp" />
-    <ClCompile Include="CBomb.cpp" />
-    <ClCompile Include="CConsoleGameLine.cpp" />
-    <ClCompile Include="CConsoleGameScreen.cpp" />
-    <ClCompile Include="CGameEngineDebug.cpp" />
-    <ClCompile Include="CGamePlayer.cpp" />
+    <ClInclude Include="CArray.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CBomb.h" />
-    <ClInclude Include="CConsoleGameLine.h" />
-    <ClInclude Include="CConsoleGameMath.h" />
-    <ClInclude Include="CConsoleGameScreen.h" />
-    <ClInclude Include="CGameEngineDebug.h" />
-    <ClInclude Include="CGamePlayer.h" />
+    <ClCompile Include="CArray.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

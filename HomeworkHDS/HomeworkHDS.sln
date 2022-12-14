@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bomberman1", "Bomberman1\Bo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HomeworkBomberman", "HomeworkBomberman\HomeworkBomberman.vcxproj", "{2D9373E2-DA16-4E27-8C84-0624FF906608}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20221214Homwork.Array", "20221214Homwork.Array\20221214Homwork.Array.vcxproj", "{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{2D9373E2-DA16-4E27-8C84-0624FF906608}.Release|x64.Build.0 = Release|x64
 		{2D9373E2-DA16-4E27-8C84-0624FF906608}.Release|x86.ActiveCfg = Release|Win32
 		{2D9373E2-DA16-4E27-8C84-0624FF906608}.Release|x86.Build.0 = Release|Win32
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Debug|x64.ActiveCfg = Debug|x64
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Debug|x64.Build.0 = Debug|x64
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Debug|x86.ActiveCfg = Debug|Win32
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Debug|x86.Build.0 = Debug|Win32
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Release|x64.ActiveCfg = Release|x64
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Release|x64.Build.0 = Release|x64
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Release|x86.ActiveCfg = Release|Win32
+		{82F35A5C-C89E-498C-8EAF-7A177C5AD39E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

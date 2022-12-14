@@ -1,0 +1,80 @@
+#pragma once
+// 다른폴더에 있는 헤더 사용방법 숙지후 다시작성
+#include "..\HomeworkBomberman\GameEngineDebug.h"
+
+template <typename DataType>
+class CArray
+{
+public:
+	// constrcuter destructer
+	CArray() :
+		m_DataPtr(nullptr),
+		m_Size(0)
+	{
+
+	}
+
+	CArray(size_t _Size) :
+		m_DataPtr(nullptr),
+		m_Size(_Size)
+	{
+		resize(_Size);
+	}
+	~CArray()
+	{
+		if (nullptr != m_DataPtr)
+		{
+			delete[] m_DataPtr;
+			m_DataPtr = nullptr;
+		}
+	}
+
+	// delete Function
+	CArray(const CArray& _Other) = delete;
+	CArray(CArray&& _Other) noexcept = delete;
+	CArray& operator=(const CArray& _Other) = delete;
+	CArray& operator=(CArray&& _Other) noexcept = delete;
+
+public:
+	// 배열의 크기 반환 
+	size_t GetSize() 
+	{ 
+		return m_Size; 
+	}
+
+	// 인자로 들어온 값의 크기로 다시 만들어낸다. 
+	void resize(size_t _Size)
+	{
+		// 사이즈가 0 이라면 어썰트
+		if (0 == _Size)
+		{
+			MessageBoxAssert("배열의 크기가 0입니다.");
+			return;
+		}
+
+		// 사이즈를 받는다.
+		size_t Size = _Size;
+
+		// 예외처리 , 이미 배열이 동적할당 되어 있을 경우
+		if (nullptr != m_DataPtr)
+		{
+			delete[] m_DataPtr;
+			m_DataPtr = nullptr;
+
+			m_DataPtr = new DataType[Size];
+		}
+
+		// 
+		else if (nullptr == m_DataPtr)
+		{
+			m_DataPtr = new DataType[Size];
+		}
+	
+	}
+	
+private:
+	DataType* m_DataPtr = nullptr;
+	// 배열의 크기 
+	size_t m_Size;
+};
+

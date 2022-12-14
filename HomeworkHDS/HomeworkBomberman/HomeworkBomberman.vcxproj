@@ -145,6 +145,11 @@
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bomberman1\Bomberman1.vcxproj">
+      <Project>{02772f3e-80fb-4c14-8dc4-0d2412ee8aaf}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
