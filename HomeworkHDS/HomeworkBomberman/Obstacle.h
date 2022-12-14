@@ -7,7 +7,7 @@ private:
 	static Obstacle* MainObstacle;
 
 public:
-	static Obstacle* GetObstacle()
+	static Obstacle* GetMainObstacle()
 	{
 		return MainObstacle;
 	}

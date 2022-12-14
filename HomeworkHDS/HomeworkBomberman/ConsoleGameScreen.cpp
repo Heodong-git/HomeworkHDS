@@ -138,7 +138,7 @@ bool ConsoleGameScreen::IsOver(int4 _Pos)
 bool ConsoleGameScreen::IsObstacle(int4 _Pos)
 {
 
-	wchar_t Renderchar = Obstacle::GetObstacle()->GetRenderChar();
+	wchar_t Renderchar = Obstacle::GetMainObstacle()->GetRenderChar();
 
 	if (Lines[_Pos.Y][_Pos.X] == Renderchar)
 	{
