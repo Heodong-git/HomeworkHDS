@@ -1,6 +1,5 @@
 #pragma once
-// 다른폴더에 있는 헤더 사용방법 숙지후 다시작성
-#include "..\HomeworkBomberman\GameEngineDebug.h"
+#include <CGameEngineDebug.h>
 
 template <typename DataType>
 class CArray

@@ -1,11 +1,15 @@
 #include <iostream>
 #include "CArray.h"
 
+
 int main()
-{
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+{	
+	// 다른프로젝트에 있는 헤더 사용해보기 
+	LeakCheck();
 
 	CArray<int> TestArr(10);
+
+	CArray<CArray<int>> TestArr1;
 
 	TestArr.resize(20);
 
