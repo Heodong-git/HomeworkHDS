@@ -11,5 +11,7 @@ int main()
 
 	TestArr.resize(30);
 
+	TestArr.resize(40);
+
 	return 0;
 }

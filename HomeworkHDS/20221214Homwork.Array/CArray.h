@@ -72,6 +72,16 @@ public:
 	
 	}
 	
+	DataType& operator[](size_t Index)
+	{
+		if (m_Size <= Index)
+		{
+			MessageBoxAssert("인덱스의 값이 배열의 크기보다 큽니다.");
+			return;
+		}
+
+		return m_DataPtr[Index];
+	}
 private:
 	DataType* m_DataPtr = nullptr;
 	// 배열의 크기 
