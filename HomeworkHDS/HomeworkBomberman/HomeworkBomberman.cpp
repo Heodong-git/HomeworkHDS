@@ -10,13 +10,6 @@ ConsoleGameScreen Screen;
 Player MainPlayer;
 Obstacle MainObstacle;
 
-// 1. 폭탄 릭을 없애오세요.
-// 2. 폭탄을 여러개 설치하게 만드세요.
-// 3. 플레이어가 폭타을 못지나가게 하세요.
-// 4. 폭탄이 일정 시간후에 사라지게 하세요.
-      // ex)폭탄이 사라지고 난후에는 플레이어가 그 위치를 지나갈수 있어야 합니다.
-
-
 int main()
 {
     LeckCheck();
@@ -39,13 +32,11 @@ int main()
         // AA
         Screen.ScreenClear();
 
-
-        
+        // 오브젝트 업데이트
         MainObstacle.Update();
+        // 플레이어 업데이트 
         bool End = MainPlayer.Update();
-        // Ao
-        // AA
-
+        
         // 화면에 그린다.
         Screen.ScreenRender();
         Sleep(100);

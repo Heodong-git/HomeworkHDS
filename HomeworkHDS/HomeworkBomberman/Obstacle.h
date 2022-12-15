@@ -1,6 +1,7 @@
 #pragma once
 #include "ConsoleGameObject.h"
 
+// Obstacle 클래스는 ConsoleGameObject 클래스를 public 으로 상속받는 자식 클래스 
 class Obstacle : public ConsoleGameObject
 {
 private:
