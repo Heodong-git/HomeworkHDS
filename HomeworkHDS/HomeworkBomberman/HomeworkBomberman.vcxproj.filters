@@ -23,6 +23,7 @@
     <ClCompile Include="Obstacle.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
+    <ClCompile Include="..\20221214Homwork.Array\CArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="00.Base">
@@ -57,5 +58,6 @@
     <ClInclude Include="Obstacle.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
+    <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
   </ItemGroup>
 </Project>

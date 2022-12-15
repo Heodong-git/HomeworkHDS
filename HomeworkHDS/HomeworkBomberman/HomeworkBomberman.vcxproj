@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\20221214Homwork.Array\CArray.cpp" />
     <ClCompile Include="Boom.cpp" />
     <ClCompile Include="ConsoleGameMath.cpp" />
     <ClCompile Include="ConsoleGameObject.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
     <ClInclude Include="Boom.h" />
     <ClInclude Include="ConsoleGameMath.h" />
     <ClInclude Include="ConsoleGameObject.h" />

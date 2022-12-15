@@ -1,5 +1,5 @@
 #pragma once
-#include <assert.h>
+//#include <CGameEngineDebug.h>
 
 template <typename DataType>
 class CArray
@@ -17,7 +17,7 @@ public:
 		m_DataPtr(nullptr),
 		m_Size(_Size)
 	{
-		resize(_Size);
+		resize(m_Size);
 	}
 	~CArray()
 	{
@@ -47,8 +47,7 @@ public:
 		// 사이즈가 0 이라면 어썰트
 		if (0 == _Size)
 		{
-			//MessageBoxAssert("배열의 크기가 0입니다.");
-			assert(false);
+			MessageBoxAssert("배열의 크기가 0입니다.");
 			return;
 		}
 
@@ -74,11 +73,9 @@ public:
 	
 	DataType& operator[](size_t Index)
 	{
-		if (m_Size <= Index)
+		if (m_Size + 1 <= Index)
 		{
-			//MessageBoxAssert("인덱스의 값이 배열의 크기보다 큽니다.");
-			assert(false);
-			return;
+			MessageBoxAssert("인덱스의 값이 배열의 크기보다 큽니다.");
 		}
 
 		return m_DataPtr[Index];

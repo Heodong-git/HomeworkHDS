@@ -3,7 +3,7 @@
   <ItemGroup>
     <ClCompile Include="Bomberman1.cpp" />
     <ClCompile Include="CGameEngineDebug.cpp">
-      <Filter>Base</Filter>
+      <Filter>Contents\Base</Filter>
     </ClCompile>
     <ClCompile Include="CConsoleGameLine.cpp">
       <Filter>Console</Filter>
@@ -19,19 +19,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Base">
-      <UniqueIdentifier>{7776312f-5680-48cf-ba79-d3e83ab21a3e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Console">
       <UniqueIdentifier>{afb7e06b-f359-4120-aeb0-9b95f9195e90}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents">
       <UniqueIdentifier>{6da2ccd3-10d8-43ab-b9f7-bf550c082ef4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Base">
+      <UniqueIdentifier>{7776312f-5680-48cf-ba79-d3e83ab21a3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CGameEngineDebug.h">
-      <Filter>Base</Filter>
+      <Filter>Contents\Base</Filter>
     </ClInclude>
     <ClInclude Include="CConsoleGameLine.h">
       <Filter>Console</Filter>
