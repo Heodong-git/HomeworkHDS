@@ -5,6 +5,8 @@
 // Ό³Έν :
 class Boom;
 class ConsoleGameScreen;
+#include "CArray.h"
+
 class Player : public ConsoleGameObject
 {
 public:

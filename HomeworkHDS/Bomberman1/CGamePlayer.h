@@ -31,7 +31,6 @@ public:
 	void Init(const int4& _ScreenSize);
 	void SetPos(const int4& _Pos) { m_Pos = _Pos; }
 	void SetRenderchar(const wchar_t _Char) { m_RenderChar = _Char; }
-	void MinusInstallCount();
 
 	// °ª ¹ÝÈ¯
 	const int4& GetPos() { return m_Pos; }

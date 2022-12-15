@@ -5,7 +5,7 @@
 int main()
 {	
 	// 다른프로젝트에 있는 헤더 사용해보기 
-	LeakCheck();
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	CArray<int> TestArr(10);
 
