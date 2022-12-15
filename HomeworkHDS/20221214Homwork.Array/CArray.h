@@ -36,7 +36,7 @@ public:
 
 public:
 	// 배열의 크기 반환 
-	size_t GetSize() 
+	const size_t GetSize() 
 	{ 
 		return m_Size; 
 	}
@@ -54,7 +54,7 @@ public:
 		// 사이즈를 받는다.
 		size_t Size = _Size;
 
-		// 예외처리 , 이미 배열이 동적할당 되어 있을 경우
+		// 예외처리. 이미 배열이 동적할당 되어 있을 경우
 		if (nullptr != m_DataPtr)
 		{
 			delete[] m_DataPtr;
@@ -63,7 +63,7 @@ public:
 			m_DataPtr = new DataType[Size];
 		}
 
-		// 
+		// 동적할당 되어있지 않다면 사이즈만큼 동적배열 할당
 		else if (nullptr == m_DataPtr)
 		{
 			m_DataPtr = new DataType[Size];

@@ -19,8 +19,8 @@ Boom::~Boom()
 
 void Boom::Update()
 {
-	// 현재 레인지가 설정된 레인지보다 크거나 같다면 리턴
-	if (CurRange >= Range)
+	// 현재 레인지가 설정된 레인지보다 크다면 리턴
+	if (CurRange > Range)
 	{
 		return;
 	}
@@ -37,7 +37,7 @@ void Boom::Update()
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(BoomPos, GetRenderChar());
 
 	// 
-		for (int i = 1; i < CurRange + 1; i++)
+		for (int i = 1; i < CurRange; i++)
 		{
 			int4 LeftPos = BoomPos + int4{ -i , 0 };
 
