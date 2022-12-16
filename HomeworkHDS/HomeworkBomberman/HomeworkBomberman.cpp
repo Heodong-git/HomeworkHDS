@@ -1,26 +1,45 @@
-﻿#include <iostream>
+﻿// Bomberman.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+//
+
+#include <iostream>
 #include "ConsoleGameScreen.h"
 #include "Player.h"
+#include "Wall.h"
 #include "GameEngineDebug.h"
-#include "Obstacle.h"
 #include <conio.h>
+#include "Monster.h"
 
 ConsoleGameScreen Screen;
 // 이렇게 생성해도 됩니다.
 Player MainPlayer;
-Obstacle MainObstacle;
+
+// 1. 폭탄 릭을 없애오세요.
+// 2. 폭탄을 여러개 설치하게 만드세요.
+// 3. 플레이어가 폭타을 못지나가게 하세요.
+// 4. 폭탄이 일정 시간후에 사라지게 하세요.
+      // ex)폭탄이 사라지고 난후에는 플레이어가 그 위치를 지나갈수 있어야 합니다.
+
+// 1. 장애물 만들기
+// 2. 플레이어는 못지나감.
+
+// 1. 몬스터를 1개 화면에 나오게 한다.
+// 2. 몬스터a가 왼쪽으로 움직이다가 끝을 만나면 오른쪽으로 가게 만드세요.
+// 3. 몬스터b를 만들고 위로 움직이다가 끝을 만나면 
+
+int4 ScreenSize = { 15, 11 };
 
 int main()
 {
     LeckCheck();
 
-    // 지역변수로 만들어졌어.
-    Screen.ScreenInit({ 15, 11 }, L'■');
-    MainObstacle.Init({ 15, 11 });
-    // 
+    Monster Monster00;
 
-    // ■■
-    // ■■
+    // 지역변수로 만들어졌어.
+    Screen.ScreenInit(ScreenSize, L'■');
+    Monster00.Init();
+    Boom::BoomMapInit(ScreenSize);
+    Wall::WallMapInit(ScreenSize);
+
 
     // 정상종료를 시켜줘야 하는데.
     while (true)
@@ -32,14 +51,19 @@ int main()
         // AA
         Screen.ScreenClear();
 
-        // 오브젝트 업데이트
-        MainObstacle.Update();
-        // 플레이어 업데이트 
+        Wall::WallUpdate();
+
         bool End = MainPlayer.Update();
-        
+        Monster00.Update();
+       
+        // Ao
+        // AA
+
         // 화면에 그린다.
         Screen.ScreenRender();
         Sleep(100);
+
+        Boom::MapClear();
 
         if (false == End)
         {

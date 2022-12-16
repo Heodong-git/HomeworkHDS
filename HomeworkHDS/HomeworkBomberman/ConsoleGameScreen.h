@@ -54,6 +54,8 @@ public:
 	bool IsObstacle(int4 _Pos);
 	wchar_t IsRenderchar(int4 _Pos);
 
+	const int4 GetScreenSize() { return ScreenSize; }
+
 protected:
 
 

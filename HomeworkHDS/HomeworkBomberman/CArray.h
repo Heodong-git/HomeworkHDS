@@ -1,5 +1,5 @@
 #pragma once
-//#include <CGameEngineDebug.h>
+#include "GameEngineDebug.h"
 
 template <typename DataType>
 class CArray

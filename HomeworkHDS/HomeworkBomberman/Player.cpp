@@ -3,29 +3,25 @@
 #include "ConsoleGameScreen.h"
 #include "GameEngineDebug.h"
 #include "Boom.h"
-#include "Obstacle.h"
+#include "Wall.h"
 
 Player::Player()
+	: ArrBoomObject(100)
 {
-	ArrBoomObject = new Boom[10000]();
-
+	// 대입
+	// ArrBoomObject = GameEngineArray<Boom>(100);
 	SetRenderChar(L'＠');
-	SetPos(int4{ 7, 5 });
 }
 
 Player::~Player()
+// ArrBoomObject()
 {
-	if (ArrBoomObject != nullptr)
-	{
-		delete[] ArrBoomObject;
-		ArrBoomObject = nullptr;
-	}
+	// 클래스의 소멸자가 알아서 호출된다.
 }
 
 bool Player::Update()
 {
-
-	if (ArrBoomObject == nullptr)
+	if (0 == ArrBoomObject.GetSize())
 	{
 		MessageBoxAssert("폭탄이 만들어지지 않았습니다.");
 		return false;
@@ -35,8 +31,6 @@ bool Player::Update()
 	{
 		ArrBoomObject[i].Update();
 	}
-
-
 
 	if (0 == _kbhit())
 	{
@@ -81,7 +75,6 @@ bool Player::Update()
 	{
 		Boom& NewBoomObject = ArrBoomObject[BoomUseCount];
 		NewBoomObject.SetPos(GetPos());
-		NewBoomObject.SetOwner(this);
 		++BoomUseCount;
 
 	}
@@ -97,26 +90,28 @@ bool Player::Update()
 	bool IsMove = true;
 
 	// 플레이어가 화면 바깥으로 나갔다면 이동하지 못하게 한다.
-	// 화면 바깥으로 나갔다면 , 다음 이동위치에 장애물이 있다면 이동불가
-	if (true == ConsoleGameScreen::GetMainScreen()->IsOver(NextPos) ||
-		true == ConsoleGameScreen::GetMainScreen()->IsObstacle(NextPos))
+	// 화면 바깥으로 나갔다면
+	if (true == ConsoleGameScreen::GetMainScreen()->IsOver(NextPos))
 	{
 		// 이동불가
 		IsMove = false;
 	}
 
+	// 폭탄들을 전부다 검사해서 만약 나의 이동위치에 폭탄이 있다면 이동하지 않는다.
+	// 공간적 최적화와
+	// 연산적 최적화가 있습니다.
+	// 근래의 트랜드는
+	// 연산적 최적화를 하는겁니다.
 
-	// 설치된 폭탄을 전부다 검사해서 만약 나의 이동위치에 폭탄이 있다면 이동하지 않는다.
-	for (size_t i = 0; i < BoomUseCount; i++)
+	if (nullptr != Boom::GetBoom(NextPos))
 	{
-		if (
-			false == ArrBoomObject[i].IsDeath() &&
-			ArrBoomObject[i].GetPos() == NextPos
-			)
-		{
-			IsMove = false;
-		}
+		IsMove = false;
 	}
+	if (true == Wall::GetIsWall(NextPos))
+	{
+		IsMove = false;
+	}
+
 
 	if (true == IsMove)
 	{
@@ -124,6 +119,7 @@ bool Player::Update()
 	}
 
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
+
 
 	return true;
 }

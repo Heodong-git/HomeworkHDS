@@ -2,11 +2,12 @@
 #include "ConsoleGameMath.h"
 #include "ConsoleGameObject.h"
 #include "Boom.h"
+#include "CArray.h"
+
+
 // Ό³Έν :
 class Boom;
 class ConsoleGameScreen;
-#include "CArray.h"
-
 class Player : public ConsoleGameObject
 {
 public:
@@ -21,12 +22,12 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 	bool Update();
-	Boom* const GetBoomArr() { return ArrBoomObject; }
-	const int GetBoomUseCount() { return BoomUseCount; }
+
 protected:
 
 private:
 	int BoomUseCount = 0;
-	Boom* ArrBoomObject = nullptr;
+	CArray<Boom> ArrBoomObject;
+
 };
 

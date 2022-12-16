@@ -1,91 +1,123 @@
 #pragma once
-#include <assert.h>
+#include "..\HomeworkBomberman\GameEngineDebug.h"
+// typedef int DataType;
 
-template <typename DataType>
+// 설명 :
+template<typename DataType>
 class CArray
 {
 public:
+	CArray()
+		: Count(0)
+		, DataPtr(nullptr)
+	{
+
+	}
+
 	// constrcuter destructer
-	CArray() :
-		m_DataPtr(nullptr),
-		m_Size(0)
+	CArray(size_t _Count)
+		: Count(_Count)
+		, DataPtr(nullptr)
 	{
-
+		// 10개짜리를 만들어달라고 한거니까.
+		// 할당해서 만들어내야 하니까.
+		resize(Count);
 	}
 
-	CArray(size_t _Size) :
-		m_DataPtr(nullptr),
-		m_Size(_Size)
-	{
-		resize(_Size);
-	}
 	~CArray()
 	{
-		if (nullptr != m_DataPtr)
-		{
-			delete[] m_DataPtr;
-			m_DataPtr = nullptr;
-		}
+		Clear();
 	}
+
 
 	// delete Function
 	CArray(const CArray& _Other) = delete;
 	CArray(CArray&& _Other) noexcept = delete;
-	CArray& operator=(const CArray& _Other) = delete;
+
+	CArray& operator=(const CArray& _Other)
+	{
+		resize(_Other.Count);
+
+		for (size_t i = 0; i < Count; i++)
+		{
+			DataPtr[i] = _Other.DataPtr[i];
+		}
+
+		return *this;
+	}
+
 	CArray& operator=(CArray&& _Other) noexcept = delete;
 
-public:
-	// 배열의 크기 반환 
-	const size_t GetSize() 
-	{ 
-		return m_Size; 
+	size_t GetSize()
+	{
+		return Count;
 	}
 
-	// 인자로 들어온 값의 크기로 다시 만들어낸다. 
-	void resize(size_t _Size)
+	void Clear()
 	{
-		// 사이즈가 0 이라면 어썰트
-		if (0 == _Size)
+		if (nullptr != DataPtr)
 		{
-			//MessageBoxAssert("배열의 크기가 0입니다.");
-			assert(false);
+			delete[] DataPtr;
+			DataPtr = nullptr;
+		}
+	}
+
+	DataType& operator[](size_t _Index)
+	{
+		if (Count <= _Index)
+		{
+			MessageBoxAssert("배열의 인덱스를 넘겼습니다");
+		}
+
+		return DataPtr[_Index];
+	}
+
+	void resize(size_t _Count)
+	{
+		if (0 == _Count)
+		{
+			MessageBoxAssert("배열의 크기가 0일수 없습니다.");
+		}
+
+		DataType* PrevData = DataPtr;
+
+		DataPtr = new DataType[_Count];
+
+		if (nullptr == PrevData)
+		{
+			Count = _Count;
 			return;
 		}
 
-		// 사이즈를 받는다.
-		m_Size = _Size;
+		size_t CopySize = _Count;
 
-		// 예외처리. 이미 배열이 동적할당 되어 있을 경우
-		if (nullptr != m_DataPtr)
+		if (Count < _Count)
 		{
-			delete[] m_DataPtr;
-			m_DataPtr = nullptr;
-
-			m_DataPtr = new DataType[m_Size];
+			CopySize = Count;
 		}
 
-		// 동적할당 되어있지 않다면 사이즈만큼 동적배열 할당
-		else if (nullptr == m_DataPtr)
+		for (size_t i = 0; i < CopySize; i++)
 		{
-			m_DataPtr = new DataType[m_Size];
+			// A = A
+			DataPtr[i] = PrevData[i];
 		}
-	
+
+		// 10   20
+		Count = _Count;
+
+		if (nullptr != PrevData)
+		{
+			delete[] PrevData;
+			PrevData = nullptr;
+		}
 	}
-	
-	DataType& operator[](size_t Index)
-	{
-		if (m_Size <= Index)
-		{
-			//MessageBoxAssert("인덱스의 값이 배열의 크기보다 큽니다.");
-			assert(false);
-			return;
-		}
 
-		return m_DataPtr[Index];
-	}
+
+protected:
+
 private:
-	DataType* m_DataPtr = nullptr;
-	// 배열의 크기 
-	size_t m_Size;
+	// 배열의 크기
+	size_t Count = 0;
+	DataType* DataPtr = nullptr;
 };
 

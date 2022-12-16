@@ -11,6 +11,7 @@ int main()
 
 	CArray<CArray<int>> TestArr1;
 
+
 	TestArr.resize(20);
 
 	TestArr.resize(30);
