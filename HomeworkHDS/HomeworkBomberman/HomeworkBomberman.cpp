@@ -33,13 +33,18 @@ int main()
     LeckCheck();
 
     Monster Monster00;
-
+    Monster Monster01;
     // 지역변수로 만들어졌어.
     Screen.ScreenInit(ScreenSize, L'■');
-    Monster00.Init();
+   
     Boom::BoomMapInit(ScreenSize);
     Wall::WallMapInit(ScreenSize);
 
+    Monster00.Init();
+    Monster00.SetNumber(1);
+    
+    Monster01.Init();
+    Monster01.SetNumber(2);
 
     // 정상종료를 시켜줘야 하는데.
     while (true)
@@ -55,6 +60,7 @@ int main()
 
         bool End = MainPlayer.Update();
         Monster00.Update();
+        Monster01.Update();
        
         // Ao
         // AA

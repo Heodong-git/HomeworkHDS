@@ -19,13 +19,14 @@ public:
 
 	bool Update();
 	void Init();
-
+	void SetNumber(const int _Number) { Number = _Number; }
 protected:
 
 private:
 	int Dir = 0;
 	int Time = 0;
 	int4 ScreenSize;
+	int Number = 0;
 };
 
 
