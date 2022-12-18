@@ -7,6 +7,7 @@
 
 class ConsoleGameScreen;
 class Player;
+
 class Boom : public ConsoleGameObject
 {
 public:

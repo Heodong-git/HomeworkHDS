@@ -1,74 +1,109 @@
 #include "Monster.h"
 #include "ConsoleGameScreen.h"
-#include "ConsoleGameObject.h"
+#include "Wall.h"
 
+/*static */CArray<Monster> Monster::AllMonster(10);
 
+size_t Monster::MonsterUpdateCount = 0;
+
+void Monster::AllMonsterInit(wchar_t _BaseChar)
+{
+	for (size_t i = 0; i < AllMonster.GetSize(); i++)
+	{
+		AllMonster[i].Off();
+		AllMonster[i].SetRenderChar(_BaseChar);
+	}
+}
+
+Monster* Monster::CreateMonster(int4 _Pos, int4 _Dir)
+{
+	Monster* ReturnMonster = &AllMonster[MonsterUpdateCount];
+	AllMonster[MonsterUpdateCount].SetPos(_Pos);
+	AllMonster[MonsterUpdateCount].SetDir(_Dir);
+	AllMonster[MonsterUpdateCount++].On();
+	return ReturnMonster;
+}
+
+void Monster::AllMonsterUpdate()
+{
+	for (size_t i = 0; i < AllMonster.GetSize(); i++)
+	{
+		if (false == AllMonster[i].GetIsUpdate())
+		{
+			continue;
+		}
+
+		AllMonster[i].Update();
+	}
+}
 
 Monster::Monster() :
-	Dir(1),
-	Time(0),
-	Number(0)
+	Dead(false)
 {
-	SetRenderChar(L'♨');
 }
 
 Monster::~Monster()
 {
 }
 
-
 void Monster::Init()
 {
-	ScreenSize = ConsoleGameScreen::GetMainScreen()->GetScreenSize();
-	SetPos(int4{ ScreenSize.X - 1, 4 });
+	//int4 LeftPos = GetPos() + int4::LEFT;
+	//int4 RightPos = GetPos() + int4::RIHGT;
+	//int4 UpPos = GetPos() + int4::UP;
+	//int4 DownPos = GetPos() + int4::DOWN;
+
+	//// 왼쪽이든 오른쪽이든 한곳이 뚤렸어.
+	//if (
+	//	ConsoleGameScreen::GetMainScreen()->IsOver(LeftPos) ||
+	//	ConsoleGameScreen::GetMainScreen()->IsOver(RightPos)
+	//	)
+	//{
+	//	// 왼쪽이든 오른쪽이든 한곳이 벽이 없어.
+	//	if (
+	//		false == Wall::GetIsWall(LeftPos) ||
+	//		false == Wall::GetIsWall(RightPos)
+	//		)
+	//	{
+	//		Dir = int4::LEFT;
+	//		return;
+	//	}
+	//}
+
+	//if (ConsoleGameScreen::GetMainScreen()->IsOver(UpPos)
+	//	&& ConsoleGameScreen::GetMainScreen()->IsOver(DownPos))
+	//{
+	//	Dir = int4::LEFT;
+	//	return;
+	//}
+
 }
 
-bool Monster::Update()
+bool Monster::IsMonster(int4 _Pos)
 {
-	// 현재포지션을 받아온다.
+	int4 MyPos = GetPos();
+
+	return MyPos == _Pos;
+}
+
+void Monster::Update()
+{
+	if (true == Dead)
+	{
+		return;
+	}
+
 	int4 Pos = GetPos();
-	
-	if (Number == 1)
+	int4 MovePos = Pos + Dir;
+
+	if (ConsoleGameScreen::GetMainScreen()->IsOver(MovePos))
 	{
-		// 현재포지션의 X 값이 스크린 X축의 마지막이라면 Dir = -1 
-		if (Pos.X == ScreenSize.X - 1)
-		{
-			Dir = -1;
-		}
-
-		// 현재포지션이 X 값이 0 보다 작거나 크다면 Dir = 1  
-		if (Pos.X == 0)
-		{
-			Dir = 1;
-		}
-
-		Pos.X += Dir;
-
-
-		SetPos(Pos);
-		ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
-
+		Dir.X *= -1;
+		Dir.Y *= -1;
 	}
 
-	if (Number == 2)
-	{
-		if (Pos.Y == ScreenSize.Y - 1)
-		{
-			Dir = -1;
-		}
 
-		if (Pos.Y == 0)
-		{
-			Dir = 1;
-		}
+	SetPos(Pos + Dir);
 
-		Pos.Y += Dir;
-
-
-		SetPos(Pos);
-		ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
-
-	}
-
-	return true;
+	Render();
 }

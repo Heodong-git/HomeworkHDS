@@ -15,6 +15,7 @@ public:
 	ConsoleGameObject& operator=(const ConsoleGameObject& _Other) = delete;
 	ConsoleGameObject& operator=(ConsoleGameObject&& _Other) noexcept = delete;
 
+
 	int4 GetPos()
 	{
 		return Pos;
@@ -37,7 +38,25 @@ public:
 
 	void Render();
 
+	bool GetIsUpdate()
+	{
+		return IsUpdate;
+	}
+
+	void On()
+	{
+		IsUpdate = true;
+	}
+
+	void Off()
+	{
+		IsUpdate = false;
+	}
+
 private:
+	bool IsUpdate = true; // true 쓴다.
+	// false 안쓴다.
+
 	int4 Pos = { 0,0 };
 	wchar_t RenderChar = L'　';
 };

@@ -5,6 +5,7 @@
 #include "player.h"
 #include "Wall.h"
 #include <Windows.h>
+#include "Monster.h"
 
 CArray<CArray<Boom*>> Boom::BoomMap;
 
@@ -76,6 +77,8 @@ void Boom::Update()
 	bool UpWall = false;
 	bool DownWall = false;
 
+	CArray<Monster>& MonsterArr = Monster::GetAllMonster();
+
 	for (int i = 1; i < CurRange; i++)
 	{
 		int4 Left = Pos + int4{ -i, 0 };
@@ -88,6 +91,14 @@ void Boom::Update()
 		if (false == LeftWall && false == ConsoleGameScreen::GetMainScreen()->IsOver(Left))
 		{
 			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Left, L'¡ß');
+
+			for (size_t i = 0; i < MonsterArr.GetSize(); ++i)
+			{
+				if (MonsterArr[i].GetPos() == Left)
+				{
+					MonsterArr[i].SetDead();
+				}
+			}
 		}
 
 		int4 Right = Pos + int4{ i, 0 };
@@ -101,6 +112,14 @@ void Boom::Update()
 		if (false == RightWall && false == ConsoleGameScreen::GetMainScreen()->IsOver(Right))
 		{
 			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Right, L'¡ß');
+
+			for (size_t i = 0; i < MonsterArr.GetSize(); ++i)
+			{
+				if (MonsterArr[i].GetPos() == Right)
+				{
+					MonsterArr[i].SetDead();
+				}
+			}
 		}
 
 		int4 Up = Pos + int4{ 0, i };
@@ -112,6 +131,14 @@ void Boom::Update()
 		if (false == UpWall && false == ConsoleGameScreen::GetMainScreen()->IsOver(Up))
 		{
 			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Up, L'¡ß');
+
+			for (size_t i = 0; i < MonsterArr.GetSize(); ++i)
+			{
+				if (MonsterArr[i].GetPos() == Up)
+				{
+					MonsterArr[i].SetDead();
+				}
+			}
 		}
 
 		int4 Down = Pos + int4{ 0, -i };
@@ -124,6 +151,14 @@ void Boom::Update()
 		if (false == DownWall && false == ConsoleGameScreen::GetMainScreen()->IsOver(Down))
 		{
 			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Down, L'¡ß');
+
+			for (size_t i = 0; i < MonsterArr.GetSize(); ++i)
+			{
+				if (MonsterArr[i].GetPos() == Down)
+				{
+					MonsterArr[i].SetDead();
+				}
+			}
 		}
 	}
 }

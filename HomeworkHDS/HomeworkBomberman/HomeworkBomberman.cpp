@@ -5,9 +5,9 @@
 #include "ConsoleGameScreen.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Monster.h"
 #include "GameEngineDebug.h"
 #include <conio.h>
-#include "Monster.h"
 
 ConsoleGameScreen Screen;
 // 이렇게 생성해도 됩니다.
@@ -32,28 +32,16 @@ int main()
 {
     LeckCheck();
 
-   /* Monster Monster00;
-    Monster Monster01;*/
-
-    CArray<Monster> MonsterArr(2);
-    
+    // 지역변수로 만들어졌어.
     Screen.ScreenInit(ScreenSize, L'■');
-   
+
     Boom::BoomMapInit(ScreenSize);
     Wall::WallMapInit(ScreenSize);
+    Monster::AllMonsterInit(L'♠');
 
-   /* Monster00.Init();
-    Monster00.SetNumber(1);*/
-    
-    size_t ArrSize = MonsterArr.GetSize();
-    for (size_t i = 0; i < ArrSize; ++i)
-    {
-        MonsterArr[(int)i].Init();
-        MonsterArr[(int)i].SetNumber((int)i + 1);
-    }
-       
-    /*Monster01.Init();
-    Monster01.SetNumber(2);*/
+    Monster::CreateMonster({ 0, 2 }, int4::LEFT);
+    Monster::CreateMonster({ 0, 3 }, int4::UP);
+    Monster::CreateMonster({ 0, 4 }, int4::RIHGT);
 
     // 정상종료를 시켜줘야 하는데.
     while (true)
@@ -66,19 +54,13 @@ int main()
         Screen.ScreenClear();
 
         Wall::WallUpdate();
+        Monster::AllMonsterUpdate();
 
         bool End = MainPlayer.Update();
-        /*Monster00.Update();
-        Monster01.Update();*/
 
-        size_t ArrSize = MonsterArr.GetSize();
-        for (size_t i = 0; i < ArrSize; ++i)
-        {
-            MonsterArr[(int)i].Update();
-        }
-       
         // Ao
         // AA
+
 
         // 화면에 그린다.
         Screen.ScreenRender();
