@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2d9373e2-da16-4e27-8c84-0624ff906608}</ProjectGuid>
-    <RootNamespace>HomeworkBomberman</RootNamespace>
+    <ProjectGuid>{08b1efb4-c5c2-4548-a518-5c2c765b827c}</ProjectGuid>
+    <RootNamespace>SnakeGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,16 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\GameEngineBase\;..\HomeworkHDS\20221214Homwork.Array;$(IncludePath)</IncludePath>
+    <IncludePath>..\GameEngineBase;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\GameEngineBase\;..\HomeworkHDS\20221214Homwork.Array;$(IncludePath)</IncludePath>
+    <IncludePath>..\GameEngineBase;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\GameEngineBase\;..\HomeworkHDS\20221214Homwork.Array;$(IncludePath)</IncludePath>
+    <IncludePath>..\GameEngineBase;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\GameEngineBase\;..\HomeworkHDS\20221214Homwork.Array;$(IncludePath)</IncludePath>
+    <IncludePath>..\GameEngineBase;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,22 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Boom.cpp" />
-    <ClCompile Include="HomeworkBomberman.cpp" />
-    <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Wall.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Boom.h" />
-    <ClInclude Include="Monster.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Wall.h" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Parts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngineBase\GameEngineBase.vcxproj">
       <Project>{9c7d106e-c02c-47e9-becf-790a198309ca}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="Parts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\HomeworkBomberman\ConsoleGameMath.cpp" />
+    <ClCompile Include="..\HomeworkBomberman\ConsoleGameObject.cpp" />
+    <ClCompile Include="..\HomeworkBomberman\ConsoleGameScreen.cpp" />
+    <ClCompile Include="..\20221214Homwork.Array\CArray.cpp" />
+    <ClCompile Include="..\HomeworkBomberman\GameEngineDebug.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\HomeworkBomberman\ConsoleGameMath.h" />
+    <ClInclude Include="..\HomeworkBomberman\ConsoleGameObject.h" />
+    <ClInclude Include="..\HomeworkBomberman\ConsoleGameScreen.h" />
+    <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
+    <ClInclude Include="..\HomeworkBomberman\GameEngineDebug.h" />
+  </ItemGroup>
+</Project>

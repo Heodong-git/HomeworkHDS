@@ -2,25 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="HomeworkBomberman.cpp" />
-    <ClCompile Include="GameEngineDebug.cpp">
-      <Filter>00.Base</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameMath.cpp">
-      <Filter>01.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameObject.cpp">
-      <Filter>01.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameScreen.cpp">
-      <Filter>01.Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Boom.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
-    <ClCompile Include="..\20221214Homwork.Array\CArray.cpp" />
     <ClCompile Include="Monster.cpp">
       <Filter>02.Contents</Filter>
     </ClCompile>
@@ -40,25 +27,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameEngineDebug.h">
-      <Filter>00.Base</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameMath.h">
-      <Filter>01.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameObject.h">
-      <Filter>01.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameScreen.h">
-      <Filter>01.Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Boom.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
-    <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
     <ClInclude Include="Monster.h">
       <Filter>02.Contents</Filter>
     </ClInclude>
