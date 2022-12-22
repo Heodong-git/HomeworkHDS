@@ -2,7 +2,8 @@
 
 // Parts 클래스의 Parts() (생성자) 
 Parts::Parts() :
-	m_PrevParts(nullptr)
+	m_Prev(nullptr),
+	m_Next(nullptr)
 {
 }
 

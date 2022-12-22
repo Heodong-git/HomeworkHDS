@@ -132,6 +132,7 @@
     <ClCompile Include="..\HomeworkBomberman\ConsoleGameObject.cpp" />
     <ClCompile Include="..\HomeworkBomberman\ConsoleGameScreen.cpp" />
     <ClCompile Include="..\HomeworkBomberman\GameEngineDebug.cpp" />
+    <ClCompile Include="ConsoleGameInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
@@ -139,6 +140,10 @@
     <ClInclude Include="..\HomeworkBomberman\ConsoleGameObject.h" />
     <ClInclude Include="..\HomeworkBomberman\ConsoleGameScreen.h" />
     <ClInclude Include="..\HomeworkBomberman\GameEngineDebug.h" />
+    <ClInclude Include="ConsoleGameInput.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

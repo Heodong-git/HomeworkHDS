@@ -6,6 +6,7 @@
     <ClCompile Include="..\HomeworkBomberman\ConsoleGameScreen.cpp" />
     <ClCompile Include="..\20221214Homwork.Array\CArray.cpp" />
     <ClCompile Include="..\HomeworkBomberman\GameEngineDebug.cpp" />
+    <ClCompile Include="ConsoleGameInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HomeworkBomberman\ConsoleGameMath.h" />
@@ -13,5 +14,6 @@
     <ClInclude Include="..\HomeworkBomberman\ConsoleGameScreen.h" />
     <ClInclude Include="..\20221214Homwork.Array\CArray.h" />
     <ClInclude Include="..\HomeworkBomberman\GameEngineDebug.h" />
+    <ClInclude Include="ConsoleGameInput.h" />
   </ItemGroup>
 </Project>
