@@ -1,7 +1,6 @@
 #include "Parts.h"
 
 std::vector<Parts*> Parts::VecParts;
-std::vector<Parts*> Parts::VecNoneEquipParts;
 
 // Parts 클래스의 Parts() (생성자) 
 Parts::Parts() :

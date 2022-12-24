@@ -52,7 +52,6 @@ public:
 	}
 
 	static std::vector<Parts*>& GetVecParts() { return VecParts; }
-	static std::vector<Parts*>& GetVecNoneEquipParts() { return VecNoneEquipParts; }
 
 protected:
 	// Parts Class 는 자신과 연결되어있는 이전 객체를 알 수 있어야 하기 때문에
@@ -62,6 +61,5 @@ protected:
 	
 private:
 	static std::vector<Parts*> VecParts;
-	static std::vector<Parts*> VecNoneEquipParts;
 };
 

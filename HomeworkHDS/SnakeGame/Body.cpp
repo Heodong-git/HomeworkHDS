@@ -44,18 +44,17 @@ bool Body::Update()
 
 void Body::CreateBody()
 {
-	// 랜덤한 위치에 다음 바디의 위치를 정해준다. 
-	// 먼저 이 랜덤 위치를 받아두고 세팅을 하는 걸로 하고
-	// 이 위치랑 현재 배열에 저장된 파츠들의 위치를 먼저 비교해서 겹치지 않을 경우에만
-	// SetPos
-	// 랜덤위치를 받고 
+	// 시드값을 시간값으로
 	srand(time(nullptr));
 
+	// 랜덤 좌표 설정
 	int4 RandPos = int4{ rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().X ,
 					  rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().Y };
 
+	// 겹치는걸 체크할 변수 
 	bool PosCheck = true;
 
+	// 현재 연결되어있는 파츠가 저장된 배열을 검사
 	for (size_t i = 0; i < Parts::GetVecParts().size(); i++)
 	{
 		// 랜덤생성된 좌표와 현재 파츠가 있는 위치가 동일하다면
@@ -65,7 +64,8 @@ void Body::CreateBody()
 		}
 	}
 
-	// 겹치지 않는 위치라면 
+	// true 일 경우 위치가 겹치지 않는다는 의미.
+	// 그 위치에 생성한다. 
 	if (true == PosCheck)
 	{
 		// 바디 생성 후 배열에 넣어주고 위치세팅
@@ -73,11 +73,12 @@ void Body::CreateBody()
 		CurBody->SetPos(RandPos);
 	}
 
-	// 만약 false 인 경우라면 랜덤위치를 다시 설정해주고
+	// 만약 false 인 경우라면 현재 설정된 위치가겹친다는 의미
 	if (false == PosCheck)
 	{
-		// 재귀호출로 랜덤위치 설정후 
+		// 겹치지 않는 위치가 나올때 까지 반복해야하기 때문에 함수 재귀호출
 		RandPos = RecursionRandPos();
+
 		// 바디 생성 후 배열에 넣어주고 위치세팅
 		CurBody = new Body();
 		CurBody->SetPos(RandPos);
@@ -89,21 +90,25 @@ Body* Body::GetCurBody()
 	return CurBody;
 }
 
+// 랜덤위치설정함수
 int4 Body::RecursionRandPos()
 {
 	// 현재 생성된 바디의 개수가 스크린사이즈총 개수 -1 개와 같거나 크다면 더이상 생성할 곳이 없음
 	int4 ScreenSize = ConsoleGameScreen::GetMainScreen()->GetScreenSize();
 	size_t MaxScreenSize = (size_t)(ScreenSize.X * ScreenSize.Y);
 
-
+	// 현재 화면이 꽉 찼기 때문에 assert / 근데 화면이 꽉찼으면 게임이긴건데
+	// 게임 Win 으로 어떻게..? 
 	if (MaxScreenSize <= Parts::GetVecParts().size())
 	{
 		MessageBoxAssert("더이상 파츠를 생성할 수 없습니다.");
 	}
 
+	// 랜덤위치설정
 	int4 RandPos = int4{ rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().X ,
 					  rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().Y };
 
+	// 체크변수 
 	bool PosCheck = true;
 
 	for (size_t i = 0; i < Parts::GetVecParts().size(); i++)
@@ -118,9 +123,11 @@ int4 Body::RecursionRandPos()
 	// 만약 false 인 경우라면 랜덤위치를 다시 설정해야한다. 
 	if (false == PosCheck)
 	{
+		// 재귀호출
 		return RandPos = RecursionRandPos();
 	}
 
+	// 여기까지 코드가 내려와서 동작한다면 체크변수가 true 라는 의미
 	return RandPos;
 }
 

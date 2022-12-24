@@ -19,7 +19,10 @@ int main()
 
     // 파츠를 만들어주고 
     Parts* StartParts = new Head();
+    
+    // 파츠가 저장될 공간의 크기는 스크린사이즈의 크기만큼 미리 할당해준다.
     Parts::GetVecParts().reserve(ScreenSize.X * ScreenSize.Y);
+    // 만들어진 파츠는 동적배열에 저장한다. 
     Parts::GetVecParts().push_back(StartParts);
 
     // 스크린초기화 
@@ -51,16 +54,14 @@ int main()
         // 바디 업데이트
         Body::GetCurBody()->Update();
 
-        // 머리 업데이트
-        // 만약 게임종료가 된다면 어떤 상황에서 
-        // 종료되었는지 보여주기 위해 화면을 한번 출력해준 후에 게임을 종료시킨다. 
+        // 업데이트를 bool 타입으로 변경하고 
+        // 반환하는 값이 false 일 경우 종료되도록 작성
+        // 종료시에는 화면이 보여지도록 함수를 호출하여 화면을 출력해준 후에 게임을 종료시킨다. 
         if (false == StartParts->Update())
         {
             StartParts->RecursionPrevRender();
             // 바디 렌더링
             Body::GetCurBody()->Render();
-
-            // 파츠 렌더링 ( 스크린의 위치에 세팅 ) 
 
             // 화면에 출력 
             Screen.ScreenRender();
@@ -68,11 +69,10 @@ int main()
             break;
         }
 
+        // 연결된 파츠 렌더링
         StartParts->RecursionPrevRender();
         // 바디 렌더링
         Body::GetCurBody()->Render();
-
-        // 파츠 렌더링 ( 스크린의 위치에 세팅 ) 
 
         // 화면에 출력 
         Screen.ScreenRender();
