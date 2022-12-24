@@ -3,12 +3,14 @@
 #include <ConsoleGameInput.h>
 #include "Head.h"
 #include "Body.h"
+#include "Parts.h"
+#include <vector>
 
 // 전역에 스크린 클래스의 객체 생성
 ConsoleGameScreen Screen;
 
 // 스크린 사이즈 설정
-int4 ScreenSize = { 5, 5 };
+int4 ScreenSize = { 3, 3 };
 
 int main()
 {
@@ -17,6 +19,8 @@ int main()
 
     // 파츠를 만들어주고 
     Parts* StartParts = new Head();
+    Parts::GetVecParts().reserve(ScreenSize.X * ScreenSize.Y);
+    Parts::GetVecParts().push_back(StartParts);
 
     // 스크린초기화 
     Screen.ScreenInit(ScreenSize, L'□');
@@ -48,22 +52,48 @@ int main()
         Body::GetCurBody()->Update();
 
         // 머리 업데이트
-        StartParts->Update();
+        // 만약 게임종료가 된다면 어떤 상황에서 
+        // 종료되었는지 보여주기 위해 화면을 한번 출력해준 후에 게임을 종료시킨다. 
+        if (false == StartParts->Update())
+        {
+            StartParts->RecursionPrevRender();
+            // 바디 렌더링
+            Body::GetCurBody()->Render();
 
+            // 파츠 렌더링 ( 스크린의 위치에 세팅 ) 
+
+            // 화면에 출력 
+            Screen.ScreenRender();
+            std::cout << "Game Over" << std::endl; 
+            break;
+        }
+
+        StartParts->RecursionPrevRender();
         // 바디 렌더링
         Body::GetCurBody()->Render();
 
         // 파츠 렌더링 ( 스크린의 위치에 세팅 ) 
-        StartParts->Render();
 
         // 화면에 출력 
         Screen.ScreenRender();
         Sleep(100);
     }
 
-    if (nullptr != StartParts)
+    // 벡터에 저장된 동적할당된 파츠를 모두 제거한다. 
+    std::vector<Parts*> vecParts = Parts::GetVecParts();
+
+    for (size_t i = 0; i < vecParts.size(); i++)
     {
-        delete StartParts;
-        StartParts = nullptr;
+        if (nullptr != vecParts[i])
+        {
+             delete vecParts[i];
+             vecParts[i] = nullptr;
+        }
+    }
+
+    // static 변수로 선언되어있기 때문에 한번 초기화된 이후에는 초기화가 불가능함. 
+    if (nullptr != Body::GetCurBody())
+    {
+        delete Body::GetCurBody();
     }
 }

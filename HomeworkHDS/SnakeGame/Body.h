@@ -14,11 +14,12 @@ public:
 	Body& operator=(Body&& _Other) noexcept = delete;
 
 	// 부모클래스에 선언되어 있는 가상함수를 재정의해서 사용
-	void Update() override;
+	bool Update() override;
 
 	static void CreateBody();
 	static Body* GetCurBody();
 
+	static int4 RecursionRandPos();
 protected:
 
 private:

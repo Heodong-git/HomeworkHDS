@@ -1,6 +1,6 @@
 #pragma once
 #include <ConsoleGameObject.h>
-
+#include <vector>
 // Parts Class 는 ConsoleGameObject 클래스를 상속받는다. 
 class Parts : public ConsoleGameObject
 {
@@ -20,7 +20,7 @@ public:
 	// 업데이트 함수를 가상함수로 만들어주고 
 	// 자식클래스에서는 재정의하지 않으면 부모클래스의 Update를
 	// 재정의했다면 자식클래스의 Update 를 호출하여 사용하게 된다. 
-	virtual void Update();
+	virtual bool Update();
 	
 	// 자신의 이전 파츠를 세팅한다. 
 	void SetPrev(Parts* _Prev)
@@ -36,42 +36,23 @@ public:
 	Parts* GetNext() { return m_Next; }
 
 	// 재귀업데이트, 나의 이전파츠가 있다면 업데이트
-	void RecursionPrevUpdate()
-	{
-		// 이전 파츠가 nullptr 이라면 함수종료 
-		if (nullptr == m_Prev)
-		{
-			return;
-		}
-
-		// 그게 아니라면 업데이트진행, 함수재귀호출
-		m_Prev->Update();
-		m_Prev->RecursionPrevUpdate();
-	}
+	void RecursionNextMove();
 
 	// 업데이트와 마찬가지로 렌더링 재귀호출
-	void RecursionPrevRender()
-	{
-		if (nullptr == m_Prev)
-		{
-			return;
-		}
+	void RecursionPrevRender();
 
-		m_Prev->Render();
-		m_Prev->RecursionPrevRender();
-	}
-
-	Parts* GetRecursionLastParts()
+	Parts* GetLastParts()
 	{
-		// 이전 파츠가 없다면 마지막파츠인 것.
 		if (nullptr == m_Prev)
 		{
 			return this;
 		}
 
-		// 이전 파츠가 있다면 재귀호출
-		return m_Prev->GetRecursionLastParts();
+		return m_Prev->GetLastParts();
 	}
+
+	static std::vector<Parts*>& GetVecParts() { return VecParts; }
+	static std::vector<Parts*>& GetVecNoneEquipParts() { return VecNoneEquipParts; }
 
 protected:
 	// Parts Class 는 자신과 연결되어있는 이전 객체를 알 수 있어야 하기 때문에
@@ -80,5 +61,7 @@ protected:
 	Parts* m_Next = nullptr;
 	
 private:
+	static std::vector<Parts*> VecParts;
+	static std::vector<Parts*> VecNoneEquipParts;
 };
 
