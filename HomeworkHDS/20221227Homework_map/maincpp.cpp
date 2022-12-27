@@ -23,68 +23,94 @@ private:
     class BinaryNode
     {
     public:
-        BinaryNode* Parent = nullptr;
-        BinaryNode* LeftChild = nullptr;
-        BinaryNode* RightChild = nullptr;
-        GameEnginePair Pair;
+        BinaryNode* Parent = nullptr;           // 부모노드
+        BinaryNode* LeftChild = nullptr;        // 왼쪽자식
+        BinaryNode* RightChild = nullptr;       // 오른쪽자식
+        GameEnginePair Pair;                    // 키값, 실제데이터를 가진 클래스 
 
     
         // 클래스 내부에서 키값을 인자로 받아서 해당하는 키값을 가진 데이터를 찾는다.
         BinaryNode* find(const KeyType& _Key)
         {
+            // 가지고 있는 Pair 의 키값과 인자로 들어온 키값이 같다면, 찾는 대상인 것이다. 
             if (Pair.first == _Key)
             {
                 return this;
             }
+
+            // 인자로 들어온 키값이 더 작다면 왼쪽자식을 확인한다. 
             else if (Pair.first > _Key)
             {
+                // 단, 왼쪽자식이 없는 상태라면 대상이 없는 것이다.  nullptr 반환
                 if (nullptr == LeftChild)
                 {
                     return nullptr;
                 }
 
+                // 그게 아니라면 왼쪽으로 탐색한다. 
                 return LeftChild->find(_Key);
             }
+
+            // 인자로 들어온 키값이 더 크다면
             else if (Pair.first < _Key)
             {
+                // 키값이 더 크지만 오른쪽 자식이 없다면 대상이 없는것이다. nullptr 반환
                 if (nullptr == RightChild)
                 {
                     return nullptr;
                 }
 
+                // 오른쪽으로 탐색한다. 
                 return RightChild->find(_Key);
             }
 
+            // 두경우 모두 해당되지 않는다면 nullptr 반환, 대상없음 
             return nullptr;
 
         }
 
+        // 추가, 인자로 들어온 Pair 의 키값, 밸류를 노드를 생성하여 추가한다. 
         void Insert(const GameEnginePair& _Pair)
         {
+            // 루트노드의 키값보다 인자로 들어온 키값이 더작다면, 왼쪽에추가한다. 
             if (Pair.first > _Pair.first)
             {
+                // 현재 왼쪽 노드가 nullptr 이라면, 그자리에 추가한다. 
                 if (nullptr == LeftChild)
                 {
+                    // 노드생성 , 데이터 저장
                     LeftChild = new BinaryNode();
                     LeftChild->Pair = _Pair;
+
+                    // 부모노드를 나로 지정
                     LeftChild->Parent = this;
+    
                     return;
                 }
 
+                // 키값이 더작지만, 왼쪽 자식노드가 있다면 재귀호출
                 return LeftChild->Insert(_Pair);
             }
+
+            // 루트노드의 키값보다 인자로 들어온 키값이 더크다면 오른쪽에 추가한다. 
             else if (Pair.first < _Pair.first)
             {
+                // 만약 오른쪽자식노드가 nullptr 이라면 현재 객체의 오른쪽자식노드에 추가한다.
                 if (nullptr == RightChild)
                 {
+                    // 노드생성 후 데이터 저장
                     RightChild = new BinaryNode();
                     RightChild->Pair = _Pair;
+                    // 부모설정
                     RightChild->Parent = this;
                     return;
                 }
 
+                // 현재 오른쪽자식노드가 있다면 재귀호출
                 RightChild->Insert(_Pair);
             }
+            
+            // 그 외의 경우라면 키값이 겹치는 것으로 판단한다.
             else
             {
                 MessageBoxAssert("키가 겹치는 pair를 insert했습니다");
@@ -214,23 +240,30 @@ public:
 public:
     void insert(const GameEnginePair& _Pair)
     {
+        // 현재 아무 데이터도 추가되지 않은 상태에서의 insert
         if (nullptr == RootNode)
         {
             RootNode = new BinaryNode();
             RootNode->Pair = _Pair;
             return;
         }
-
+        
+        // 현재 루트 노드가 있다면 클래스내부적으로 구현한 insert 호출 
         RootNode->Insert(_Pair);
     }
 
+    // 키값을 인자로 받고 해당하는 데이터를 찾는다. 
     iterator find(const KeyType& _Key)
     {
+        // 현재 루트노드가 nullptr 이라면 
+        // 데이터가 저장되어 있지 않은 것, nullptr 반환
         if (nullptr == RootNode)
         {
             return end();
         }
 
+        // 저장된 데이터가 있다면
+        // iterator 에 대상을 저장하여 find함수로 찾아준 후 반환해준다.
         iterator NewIter;
         NewIter.CurNode = RootNode->find(_Key);
         return NewIter;
@@ -284,12 +317,19 @@ public:
            // 현재 루트노드가 nullptr이 아니라면 데이터가 저장되어 있다는 의미이다.
            if (nullptr != RootNode)
            {
-               // 루트노드를 지워준다.
-               // 이 시점에서 노드가 지워지면서 노드클래스의 소멸자가 호출되고
-               // 노드클래스의 소멸자에서는 자신의 왼쪽, 오른쪽 자식이 있다면 지워주는 코드를 작성하여
-               // 재귀적으로 호출되도록
+               if (nullptr != RootNode->LeftChild)
+               {
+                   delete RootNode->LeftChild;
+                   RootNode->LeftChild = nullptr;
+               }
+
+               if (nullptr != RootNode->RightChild)
+               {
+                   delete RootNode->RightChild;
+                   RootNode->RightChild = nullptr;
+               }
+
                delete RootNode;
-               // 초기화
                RootNode = nullptr;
            }
        }
