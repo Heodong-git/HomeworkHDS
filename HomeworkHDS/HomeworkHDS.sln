@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SnakeGame", "SnakeGame\Snak
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20221226Homework_List", "20221226Homework_List\20221226Homework_List.vcxproj", "{FB7CD05E-0E9A-474C-86E4-D026ECA09839}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20221227Homework_map", "20221227Homework_map\20221227Homework_map.vcxproj", "{537EF9AC-D47A-422B-81DD-B03AB551738E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -173,6 +175,14 @@ Global
 		{FB7CD05E-0E9A-474C-86E4-D026ECA09839}.Release|x64.Build.0 = Release|x64
 		{FB7CD05E-0E9A-474C-86E4-D026ECA09839}.Release|x86.ActiveCfg = Release|Win32
 		{FB7CD05E-0E9A-474C-86E4-D026ECA09839}.Release|x86.Build.0 = Release|Win32
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Debug|x64.ActiveCfg = Debug|x64
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Debug|x64.Build.0 = Debug|x64
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Debug|x86.ActiveCfg = Debug|Win32
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Debug|x86.Build.0 = Debug|Win32
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Release|x64.ActiveCfg = Release|x64
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Release|x64.Build.0 = Release|x64
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Release|x86.ActiveCfg = Release|Win32
+		{537EF9AC-D47A-422B-81DD-B03AB551738E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
