@@ -286,7 +286,7 @@ public:
         return NewIter;
     }
 
-    iterator& erase(const iterator& _Other)
+    iterator erase(const iterator& _Other)
     {
         // 삭제할 노드 
         BinaryNode* DeleteNode = _Other.CurNode;
@@ -302,6 +302,7 @@ public:
         {
             MessageBoxAssert("end를 삭제하려고 했습니다.");
             iterator iter;
+            iter.CurNode = nullptr;
             return iter;
         }
 
@@ -326,19 +327,7 @@ public:
                 return iter;
             }
 
-            // 우측자식노드가 있다면 우측노드 중에서 가장 작은 녀석을 담아뒀다가 반환한다. 
-            if (nullptr != RightChildNode)
-            {
-                iterator iter;
-                iter.CurNode = RightChildNode->MinNode();
-
-                delete DeleteNode;
-                DeleteNode = nullptr;
-
-                return iter;
-            }
-
-            // 우측노드가 없다면 
+            // 지워질 노드의 다음노드를 iterator 에 담아서 반환한다. 
             iterator iter;
             iter.CurNode = DeleteNode->NextNode();
 
@@ -625,13 +614,11 @@ int main()
         //std::cout << "중위 순회" << std::endl;
         //DataMap.MidOrder();
 
-        
-
-        // 10을 지우면 15가 반환되어야 함 
+       
         // 자식노드가 없을때 : 제대로 동작함
         // 자식노드가 둘다 있을 때 : 제대로 동작함
-        // 
-        GameEngineMap::iterator ResultIter = DataMap.erase(DataMap.find(16));
+        // 일단 현재 추가된 데이터로는 모두 제대로 동작
+        GameEngineMap::iterator ResultIter = DataMap.erase(DataMap.find(25));
 
         GameEngineMap::iterator StartIter = DataMap.begin();
         GameEngineMap::iterator EndIter = DataMap.end();
