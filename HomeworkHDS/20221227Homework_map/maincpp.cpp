@@ -358,8 +358,9 @@ int main()
         DataMap.insert(std::make_pair(3, 3));
         DataMap.insert(std::make_pair(20, 20));
 
-        std::map<int, int>::iterator FindIter = DataMap.find(99);
+        std::map<int, int>::iterator FindIter = DataMap.find(10);
 
+        // 찾는 이터레이터가 
         if (FindIter != DataMap.end())
         {
             FindIter->first;
@@ -397,18 +398,26 @@ int main()
         DataMap.insert(make_pair(24, 1));
         DataMap.insert(make_pair(25, 1));
 
-        GameEngineMap::iterator FindIter = DataMap.find(99);
+        // 99 의 키값을 가진 데이터가 있다면 iterator 에 담아서 반환한다. 
+        GameEngineMap::iterator FindIter = DataMap.find(25);
 
+        // 데이터가 nullptr 이 아니라면 키값 밸류값을 출력한다. 
         if (FindIter != DataMap.end())
         {
-            FindIter->first;
-            FindIter->second;
+            std::cout << FindIter->first << std::endl;
+            std::cout << FindIter->second << std::endl;
         }
 
+
+        // 루트, 왼쪽, 오른쪽
         std::cout << "전위 순회" << std::endl;
         DataMap.FirstOrder();
+
+        // 왼쪽, 오른쪽, 루트
         std::cout << "후위 순회" << std::endl;
         DataMap.LastOrder();
+
+        // 왼쪽, 루트, 오른쪽 
         std::cout << "중위 순회" << std::endl;
         DataMap.MidOrder();
 
@@ -417,14 +426,3 @@ int main()
 
 
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
