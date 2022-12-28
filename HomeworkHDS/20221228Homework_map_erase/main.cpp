@@ -341,6 +341,7 @@ public:
         BinaryNode* ChangeNode = nullptr;
         BinaryNode* ChangeParentNode = nullptr;
 
+        // 왼쪽자식노드가 있다면
         if (nullptr != LeftChildNode)
         {
             ChangeNode = LeftChildNode->MaxNode();
@@ -356,12 +357,17 @@ public:
             ChangeParentNode = ChangeNode->Parent;
         }
 
+        // 바뀔노드의부모노드가 nullptr이 아니라면
         if (nullptr != ChangeParentNode)
         {
-            // 여기서 10의 자식인 3의 자리에 3의 왼쪽자식을 넣어줌
-            // 3의 왼쪽자식은 없기 때문에 nullptr을 10의 왼쪽자식으로 넣어주게 됨 
-            // 그럼 맵에 3은 저장되어 있지만 연결이 안된 상태가 아닌가? 
-            //ChangeParentNode->ChildChange(ChangeNode, ChangeNode->LeftChild);
+            // 상황 : 2 erase 
+            // ChangeNode : 3 , ChangeParentNode = 10
+            // 10의 왼쪽자식은 3으로 그대로 남아있어야 하는데
+            // 3의 왼쪽자식은 nullptr 이기때문에 nullptr을 10의 왼쪽자식으로 넣어주게 되고
+            // 그럼 맵에 3은 저장은 되어있지만 10의 왼쪽자식이 아니기 때문에 2를 삭제하고
+            // 10의 왼쪽자식이 없는 걸로 연산이 되어서 다음 노드를 반환하게 되면 10이 나오는것 같다. 
+            // 일단 주석
+            // ChangeParentNode->ChildChange(ChangeNode, ChangeNode->LeftChild);
         }
 
         // 부모노드가 nullptr이 아니라면
@@ -618,7 +624,7 @@ int main()
         // 자식노드가 없을때 : 제대로 동작함
         // 자식노드가 둘다 있을 때 : 제대로 동작함
         // 일단 현재 추가된 데이터로는 모두 제대로 동작
-        GameEngineMap::iterator ResultIter = DataMap.erase(DataMap.find(25));
+        GameEngineMap::iterator ResultIter = DataMap.erase(DataMap.find(30));
 
         GameEngineMap::iterator StartIter = DataMap.begin();
         GameEngineMap::iterator EndIter = DataMap.end();
