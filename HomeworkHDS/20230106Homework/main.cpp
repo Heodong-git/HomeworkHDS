@@ -44,8 +44,6 @@ public:
 			}
 		}
 
-		
-
 		// 문자열 배열을 만든다.
 		char ChangeText[256] = {};
 
@@ -83,5 +81,6 @@ int main()
 	strTest.MoveParent();
 	std::cout << strTest.Teststr.c_str() << std::endl;
 	strTest.MoveParent();
+
 	return 0;
 }
