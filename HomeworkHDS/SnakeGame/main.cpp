@@ -17,6 +17,8 @@ int main()
     // 릭체크
     LeckCheck();
 
+    int a = 0;
+
     // 파츠를 만들어주고 
     Parts* StartParts = new Head();
     
